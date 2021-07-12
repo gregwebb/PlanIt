@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Poiret+One&family=Port+Lligat+Sans&family=Rokkitt:wght@300&display=swap" rel="stylesheet">
+    <title>PlanIt</title>
+</head>
+<body>
+    <header class='navbar-header'>
+        <nav>
+            <div class='navbar-container'>
+                <div class='nav-wrapper-left'>
+                    <ul>
+                        <li>HOME</li>
+                        <li>PLANS</li>
+                        <li>MY ACTIVITY</li>
+                        <li>SEARCH NEW PLACE</li>
+                    </ul>
+                </div>
+                <div class='nav-wrapper-right'>
+                    <ul>
+                        <li>LOG-IN</li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    {% block content %}
+        
+    {% endblock content %}
+        
+</body>
+</html>
