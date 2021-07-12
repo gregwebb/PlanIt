@@ -1,0 +1,62 @@
+body {
+    background: url('/static/images/bg.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    left: 50%;
+    text-align: center;
+}
+
+#logo {
+    font-family: 'Poiret One', cursive;
+    font-size: 40px;
+    color: white;
+}
+
+nav {
+    background-color: #27272799;
+    width:100%;
+    color: white;
+}
+
+.navbar-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-wrapper-left ul {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-wrapper-left ul, .nav-wrapper-right ul {
+    padding: 0;
+}
+
+nav li{
+    list-style: none;
+    
+    padding-right: 5px;
+    padding-bottom: 5px;
+}
+
+@media screen and (min-width: 550px){
+    .navbar-container{
+        flex-direction: row;
+        position: relative;
+    }
+    .nav-wrapper-left ul {
+        flex-direction: row;
+    }
+    .nav-wrapper-right {
+        position: absolute;
+        right: 15px;
+    }
+    nav li:first-child {
+        padding-left: 30px;
+    }
+    nav li {
+        padding-right: 15px;
+    }
+}
