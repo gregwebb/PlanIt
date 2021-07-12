@@ -1,7 +1,7 @@
 from django.shortcuts import render
-
 from django.http import HttpResponse
+from .models import Activity
 
 
 def home(request):
-  return HttpResponse('<h1>Welcome to PlanIt</h1>')
+  return render(request, 'home.html')
