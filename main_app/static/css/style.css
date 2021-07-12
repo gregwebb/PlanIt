@@ -8,6 +8,11 @@ body {
     text-align: center;
 }
 
+a {
+    color: white;
+    text-decoration: none;
+}
+
 #logo {
     font-family: 'Poiret One', cursive;
     font-size: 40px;
