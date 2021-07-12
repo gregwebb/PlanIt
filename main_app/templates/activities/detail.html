@@ -6,7 +6,7 @@
 {% for activity in activities %}
     
     <div class="activity-main-container">
-        <a href="{% url 'detail' activity.id %}">
+
             <div class="acitivity-content-container">
                 <h3 class="activity-name">{{ activity.name }}</h3>
                 <div class="activity-description-container">
@@ -29,7 +29,7 @@
                     {% endif %}     
                 </div> -->
             </div>
-        </a>
+
     </div>
 {% endfor %}
     
