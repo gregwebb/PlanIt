@@ -2,6 +2,11 @@ from django.db import models
 from django.urls import reverse
 from django.contrib.postgres.fields import ArrayField, DateTimeRangeField
 from django.contrib.auth.models import User
+from django.conf import settings
+import requests, json 
+
+GOOG_KEY = getattr(settings, "GOOG_KEY", None)
+
 
 class Activity(models.Model):
   name = models.CharField(max_length=255)
@@ -22,5 +27,12 @@ class Proposal(models.Model):
   activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
   user = models.ForeignKey(User, on_delete=models.CASCADE)
   suggestion = models.CharField(max_length=255)
-  availability = ArrayField(DateTimeRangeField())
   location = location = models.CharField(max_length=255)
+
+  def save(self, *args, **kwargs):
+    loc = requests.get(f'https://maps.googleapis.com/maps/api/geocode/json?&address={self.location}&key={GOOG_KEY}')
+    data = json.loads(loc.text)['results']
+    self.location = f"{data[0]['geometry']['location']['lat']}, {data[0]['geometry']['location']['lng']}"
+    super().save(*args, **kwargs)
+
+
