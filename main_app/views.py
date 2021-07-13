@@ -36,7 +36,7 @@ class ActivityCreate(LoginRequiredMixin, CreateView):
 
 class ActivityUpdate(LoginRequiredMixin, UpdateView):
   model = Activity
-  fields = ['name', 'date', 'duration', 'start', 'location']
+  fields = ['name', 'date', 'duration', 'start', 'location', 'attendees']
 
 class ActivityDelete(LoginRequiredMixin, DeleteView):
   model = Activity
