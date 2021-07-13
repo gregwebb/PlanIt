@@ -10,7 +10,7 @@ class Activity(models.Model):
   duration = models.DurationField()
   start = models.TimeField()
   location = models.CharField(max_length=255)
-  attendees = ArrayField(ArrayField(models.IntegerField()))
+  attendees = ArrayField((models.IntegerField()))
   
   def get_absolute_url(self):
     return reverse('detail', kwargs={'activity_id': self.id})
