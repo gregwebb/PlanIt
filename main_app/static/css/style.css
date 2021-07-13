@@ -6,6 +6,7 @@ body {
     background-size: cover;
     left: 50%;
     text-align: center;
+    color:white;
 }
 
 a {
@@ -20,7 +21,7 @@ a {
 }
 
 nav {
-    background-color: #27272799;
+    background-color: #0c0c0c99;
     width:100%;
     color: white;
 }
@@ -44,6 +45,40 @@ nav li{
     
     padding-right: 5px;
     padding-bottom: 5px;
+}
+
+.title {
+    color: white;
+}
+
+.main-container {
+    border-radius: 30px;
+    background-color: #1d1d1d99;
+    padding-bottom: 8px;
+}
+
+.card-container {
+    margin: 15px;
+    border-radius: 30px;
+    background-color: rgba(113, 175, 198, .80);
+}
+
+#activity-create-btn {
+    background-image: linear-gradient(120deg, #ddf7ff 0%, #86cfff 100%);
+    box-shadow: 2px 4px 25px rgba(0,0,0,.1);
+    overflow: hidden;
+    padding: 10px;
+    border-style: solid;
+    border-radius: 30px;
+}
+
+#activity-create-btn:hover {
+    background-image: linear-gradient(120deg, #43d2fd 0%, #cce5f7 100%);
+    box-shadow: 4px 4px 30px rgba(0,0,0,.4);
+    overflow: hidden;
+}
+#activity-create-btn a {
+    color: rgb(11, 62, 77);
 }
 
 @media screen and (min-width: 550px){

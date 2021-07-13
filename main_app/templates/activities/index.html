@@ -1,30 +1,35 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Activities</h2>
 
-{% for activity in activities %}
+<div class="main-container">
+    <h2 class="title">Activities</h2>
     
-    <div class="activity-main-container">
-        <a href="{% url 'detail' activity.id %}">
-            <div class="activity-content-container">
-                <h3 class="activity-name">{{ activity.name }}</h3>
-                <div class="activity-description-container">
-                    <p>CATEGORY: {{ activity.category }}</p>
-                    <p>DATE: {{ activity.date }}</p>
-                    <p>DURATION: {{ activity.duration }}</p>
-                    <p>START: {{ activity.start }}</p>
-                    <p>LOCATION: {{ activity.location }}</p>
+    {% for activity in activities %}
+        <div class="card-container">
+            <a href="{% url 'detail' activity.id %}">
+                <div class="activity-content-container">
+                    <h3 class="activity-name">{{ activity.name }}</h3>
+                    <div class="activity-description-container">
+                        <p>CATEGORY: {{ activity.category }}</p>
+                        <p>DATE: {{ activity.date }}</p>
+                        <p>DURATION: {{ activity.duration }}</p>
+                        <p>START: {{ activity.start }}</p>
+                        <p>LOCATION: {{ activity.location }}</p>
+                    </div>
                 </div>
-            </div>
-        </a>
-    </div>
-{% endfor %}
-    
-<div class="new-activity-form">
+            </a>
+        </div>
+    {% endfor %}
+    <div class="new-activity-form">
+        <form action="{% url 'activities_create' %}">
+            <input type="submit" value="CREATE NEW ACTIVITY" id="activity-create-btn">
+        </form>
 
+    </div>
 
 </div>
+
 
 {% endblock content %}
     
