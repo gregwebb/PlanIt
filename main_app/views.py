@@ -11,6 +11,7 @@ def signup(request):
   error_message = ''
 
   if request.method == "POST":
+    pass
     form = UserCreationForm(request.POST)
 
     if form.is_valid():
