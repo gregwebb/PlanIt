@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Activity
+from .models import Activity, Proposal
 
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
