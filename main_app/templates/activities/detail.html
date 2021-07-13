@@ -2,8 +2,6 @@
 
 {% block content %}
 <h2>Activities</h2>
-
-{% for activity in activities %}
     
     <div class="activity-main-container">
 
@@ -17,21 +15,11 @@
                     <p>LOCATION: {{ activity.location }}</p>
                 </div>
                     
-                <!-- <div class="activity-attendees-container">
-                    {% if {{ activity.attendees }} %}
-                        {% for attendee in {{ activity.attendees }} %}
-                            <div class="attendee-name-tag">
-                                <p>{{ attendee.name }}</p>
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        <p>NO ATTENDEE YET</p>
-                    {% endif %}     
-                </div> -->
+
             </div>
 
     </div>
-{% endfor %}
+
     
 
 
