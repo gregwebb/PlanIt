@@ -16,10 +16,19 @@
                         <p>DURATION: {{ activity.duration }}</p>
                         <p>START: {{ activity.start }}</p>
                         <p>LOCATION: {{ activity.location }}</p>
+                        <p>ATTENDEES: {{ activity.attendees }}</p>
                     </div>
-                    <div>
-                        <a href="{% url 'activities_update' activity.id %}">Edit</a>
-                        <a href="{% url 'activities_delete' activity.id %}">Delete</a>
+                    <div class="button-container">
+                        <div class="edit-delete-container">
+                            <form action="{% url 'activities_update' activity.id %}">
+                                <input type="submit" value="EDIT" class="edit-btn">
+                            </form>
+                            <form action="{% url 'activities_delete' activity.id %}">
+                                <input type="submit" value="DELETE" class="delete-btn">
+                            </form>
+    
+                        </div>
+
                     </div>
                         
     

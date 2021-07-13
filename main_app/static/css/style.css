@@ -17,6 +17,7 @@ a {
 #logo {
     font-family: 'Poiret One', cursive;
     font-size: 40px;
+    text-shadow: 3px 2px #000;
     color: white;
 }
 
@@ -55,6 +56,42 @@ nav li{
     border-radius: 30px;
     background-color: #1d1d1d99;
     padding-bottom: 8px;
+    margin-top: 20px;
+    padding-top: 10px;
+}
+.home-container {
+    position: relative;
+    /* overflow: hidden; */
+}
+.home-page-container {
+    position: absolute;
+    left: -100px;
+    border-radius: 30px;
+    margin-top: 20px;
+    background-color: #1d1d1d99;
+    padding-top: 20vh;
+    padding-bottom: 20vh;
+    padding-right: auto;
+    padding-left: auto;
+    -webkit-animation: slide .5s forwards;
+    -webkit-animation-delay: 2s;
+    animation: slide 1.0s forwards;
+    animation-delay: 0s;
+}
+footer {
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left:0;
+    right:0;
+    bottom: 10px;
+}
+@-webkit-keyframes slide {
+    100% { left: 0; right: 0;}
+}
+
+@keyframes slide {
+    100% { left: 0; right: 0;}
 }
 
 .card-container {
@@ -63,18 +100,19 @@ nav li{
     background-color: rgba(113, 175, 198, .80);
 }
 
-#add-activity{
-    margin-top: 20px;
-    padding-top: 10px;
+#add-activity-btn, .log-in-btn {
+    margin: 10px;
 }
-
 
 #add-activity-form table {
     margin-left: auto;
     margin-right: auto;
 }
-
-.create-btn {
+.edit-delete-container {
+    justify-content: center;
+    padding: 10px;
+}
+.create-btn, .log-in-btn {
     background-image: linear-gradient(120deg, #ddf7ff 0%, #86cfff 100%);
     box-shadow: 2px 4px 25px rgba(0,0,0,.1);
     overflow: hidden;
@@ -84,14 +122,48 @@ nav li{
     color: rgb(11, 62, 77);
 }
 
-.create-btn:hover {
+.create-btn:hover, .log-in-btn:hover {
     background-image: linear-gradient(120deg, #43d2fd 0%, #cce5f7 100%);
     box-shadow: 4px 4px 30px rgba(0,0,0,.4);
     overflow: hidden;
 }
 
-#add-activity-btn {
-    margin: 10px;
+.edit-btn {
+    background-image: linear-gradient(120deg, #fffedd 0%, #acff86 100%);
+    box-shadow: 2px 4px 25px rgba(0,0,0,.1);
+    overflow: hidden;
+    padding: 10px;
+    border-style: solid;
+    border-radius: 30px;
+    color: rgb(8, 66, 20);
+}
+
+.edit-btn:hover {
+    background-image: linear-gradient(120deg, #91fc2e 0%, #f7f3cc 100%);
+    box-shadow: 4px 4px 30px rgba(0,0,0,.4);
+    overflow: hidden;
+}
+
+.delete-btn {
+    background-image: linear-gradient(120deg, #ffdde7 0%, #ff4583 100%);
+    box-shadow: 2px 4px 25px rgba(0,0,0,.1);
+    overflow: hidden;
+    padding: 10px;
+    border-style: solid;
+    border-radius: 30px;
+    color: rgb(85, 10, 23);
+}
+
+.delete-btn:hover {
+    background-image: linear-gradient(120deg, #fd436b 0%, #f7ccda 100%);
+    box-shadow: 4px 4px 30px rgba(0,0,0,.4);
+    overflow: hidden;
+}
+
+.edit-delete-container {
+    display: flex;
+    flex-direction: row;
+
 }
 
 @media screen and (min-width: 550px){
