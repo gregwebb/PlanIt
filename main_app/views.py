@@ -28,7 +28,7 @@ def signup(request):
 
 class ActivityCreate(LoginRequiredMixin, CreateView):
   model = Activity
-  fields = ['name', 'date', 'duration', 'start', 'location', 'attendees']
+  fields = ['name', 'category', 'date', 'duration', 'start', 'location', 'attendees']
 
   def form_valid(self, form):
     form.instance.user = self.request.user
