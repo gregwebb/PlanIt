@@ -22,5 +22,5 @@ class Proposal(models.Model):
   activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
   user = models.ForeignKey(User, on_delete=models.CASCADE)
   suggestion = models.CharField(max_length=255)
-  availability = ArrayField((models.DateTimeRangeField))
+  availability = ArrayField(DateTimeRangeField())
   location = location = models.CharField(max_length=255)
