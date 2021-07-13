@@ -14,6 +14,10 @@
                     <p>START: {{ activity.start }}</p>
                     <p>LOCATION: {{ activity.location }}</p>
                 </div>
+                <div>
+                    <a href="{% url 'activities_update' activity.id %}">Edit</a>
+                    <a href="{% url 'activities_delete' activity.id %}">Delete</a>
+                </div>
                     
 
             </div>

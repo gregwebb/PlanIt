@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Activity
 
 from django.contrib.auth import login
@@ -25,6 +25,22 @@ def signup(request):
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
   
+
+class ActivityCreate(LoginRequiredMixin, CreateView):
+  model = Activity
+  fields = ['name', 'date', 'duration', 'start', 'location', 'attendees']
+
+  def form_valid(self, form):
+    form.instance.user = self.request.user
+    return super().form_valid(form)
+
+class ActivityUpdate(LoginRequiredMixin, UpdateView):
+  model = Activity
+  fields = ['name', 'date', 'duration', 'start', 'location']
+
+class ActivityDelete(LoginRequiredMixin, DeleteView):
+  model = Activity
+  success_url = '/activities/'
 
 def home(request):
   return render(request, 'home.html')
