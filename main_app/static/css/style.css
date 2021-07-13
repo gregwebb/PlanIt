@@ -111,7 +111,10 @@ footer {
 .edit-delete-container {
     justify-content: center;
     padding: 10px;
+    display: flex;
+    flex-direction: row;
 }
+
 .create-btn, .log-in-btn {
     background-image: linear-gradient(120deg, #ddf7ff 0%, #86cfff 100%);
     box-shadow: 2px 4px 25px rgba(0,0,0,.1);
@@ -160,11 +163,7 @@ footer {
     overflow: hidden;
 }
 
-.edit-delete-container {
-    display: flex;
-    flex-direction: row;
 
-}
 
 @media screen and (min-width: 550px){
     .navbar-container{
