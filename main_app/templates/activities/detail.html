@@ -1,28 +1,42 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Activities</h2>
+
+<div class="main-container"> 
     
-    <div class="activity-main-container">
+    <h2 class="title">Activities</h2>
+        
+        <div class="card-container">
+    
+                <div class="activity-content-container">
+                    <h3 class="activity-name">{{ activity.name }}</h3>
+                    <div class="activity-description-container">
+                        <p>CATEGORY: {{ activity.category }}</p>
+                        <p>DATE: {{ activity.date }}</p>
+                        <p>DURATION: {{ activity.duration }}</p>
+                        <p>START: {{ activity.start }}</p>
+                        <p>LOCATION: {{ activity.location }}</p>
+                        <p>ATTENDEES: {{ activity.attendees }}</p>
+                    </div>
+                    <div class="button-container">
+                        <div class="edit-delete-container">
+                            <form action="{% url 'activities_update' activity.id %}">
+                                <input type="submit" value="EDIT" class="edit-btn">
+                            </form>
+                            <form action="{% url 'activities_delete' activity.id %}">
+                                <input type="submit" value="DELETE" class="delete-btn">
+                            </form>
+    
+                        </div>
 
-            <div class="activity-content-container">
-                <h3 class="activity-name">{{ activity.name }}</h3>
-                <div class="activity-description-container">
-                    <p>CATEGORY: {{ activity.category }}</p>
-                    <p>DATE: {{ activity.date }}</p>
-                    <p>DURATION: {{ activity.duration }}</p>
-                    <p>START: {{ activity.start }}</p>
-                    <p>LOCATION: {{ activity.location }}</p>
+                    </div>
+                        
+    
                 </div>
-                <div>
-                    <a href="{% url 'activities_update' activity.id %}">Edit</a>
-                    <a href="{% url 'activities_delete' activity.id %}">Delete</a>
-                </div>
-                    
+    
+        </div>
+</div>
 
-            </div>
-
-    </div>
 
     
 
