@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Activity, Proposal
+from .forms import ProposalForm
 
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
@@ -53,4 +54,14 @@ def activities_detail(request, activity_id):
   activity = Activity.objects.get(id=activity_id)
   return render(request, 'activities/detail.html', {
     'activity': activity
+  })
+
+class ProposalCreate(LoginRequiredMixin, CreateView):
+  model = Proposal
+  fields = ['activity', 'user', 'suggestion', 'location']
+  
+def proposals_detail(request, proposal_id):
+  proposal = Proposal.objects.get(id=proposal_id)
+  return render(request, 'proposals/detail.html', {
+    'proposal': proposal
   })

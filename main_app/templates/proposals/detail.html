@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Proposals</h2>
+    
+    <div class="activity-main-container">
+
+            <div class="activity-content-container">
+                <div class="activity-description-container">
+                    <p>Activity: {{ proposal.activity.name }}</p>
+                    <p>User: {{ proposal.user.username }}</p>
+                    <p>Suggestion: {{ proposal.suggestion }}</p>
+                    <p>LOCATION: {{ proposal.location }}</p>
+                </div>
+                <div>
+ 
+                </div>
+                    
+
+            </div>
+
+    </div>
+
+    
+
+
+{% endblock content %}
