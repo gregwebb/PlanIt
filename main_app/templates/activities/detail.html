@@ -16,8 +16,9 @@
                         <p>DURATION: {{ activity.duration }}</p>
                         <p>START: {{ activity.start }}</p>
                         <p>LOCATION: {{ activity.location }}</p>
-                        <p>ATTENDEES: {{ activity.attendees }}</p>
+                        <p>ATTENDEES: {{ activity.attendees }}</p><br>
                     </div>
+                    {% if user == activity.user %}
                     <div class="button-container">
                         <div class="edit-delete-container">
                             <form action="{% url 'activities_update' activity.id %}">
@@ -30,6 +31,7 @@
                         </div>
 
                     </div>
+                    {% endif %}
                         
     
                 </div>
@@ -39,19 +41,11 @@
         </div>
 
         <div class="card-container">
-    
-            <div class="activity-content-container">
-                <form action="{% url 'add_proposal' activity.id %}" method="post">
-                    {% csrf_token %}
-                    {{ proposal_form.as_p }}
-                    <input type="submit" class="btn" value="Add Proposal">
-                  </form>
-            </div>
 
             <table class="striped">
                 <tbody>
                   {% for proposal in activity.proposal_set.all %}
-                      <tr>User: {{proposal.user}}</tr>
+                      <br><tr>User: {{proposal.user}}</tr>
                       <br/>
                       <tr>Suggestion: {{proposal.suggestion}}</tr>
                       <br/>
@@ -60,6 +54,14 @@
                   {% endfor %}
                 </tbody>
               </table>
+
+              <div class="activity-content-container">
+                <form action="{% url 'add_proposal' activity.id %}" method="post">
+                    {% csrf_token %}
+                    {{ proposal_form.as_p }}
+                    <input type="submit" class="create-btn" value="ADD PROPOSAL"><br><br>
+                  </form>
+            </div>
 
     </div>
 </div>

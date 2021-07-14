@@ -53,7 +53,11 @@ class ActivityDelete(LoginRequiredMixin, DeleteView):
   success_url = '/activities/'
 
 def home(request):
-  return render(request, 'home.html')
+  if request.user.is_authenticated:
+    activities = Activity.objects.filter(user=request.user)
+    return render(request, 'home.html', { 'activities': activities })
+  else:
+    return render(request, 'home.html')
 
 def activities_index(request):
   activities = Activity.objects.all()
