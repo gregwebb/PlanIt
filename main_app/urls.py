@@ -14,6 +14,7 @@ urlpatterns = [
     # path('proposals/', views.ProposalList.as_view(), name='proposals_index'),
     path('proposals/<int:proposal_id>/', views.proposals_detail, name='proposals_detail'),
     path('proposals/create/', views.ProposalCreate.as_view(), name='proposals_create'),
+    path('activities/<int:activity_id>/add_proposal/', views.add_proposal, name='add_proposal'),
     # path('proposals/<int:pk>/update/', views.ProposalUpdate.as_view(), name='proposals_update'),
     # path('proposals/<int:pk>/delete/', views.ProposalDelete.as_view(), name='proposals_delete'),
     path('accounts/signup', views.signup, name='signup'), 
