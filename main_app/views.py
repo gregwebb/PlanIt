@@ -46,6 +46,7 @@ def create_activity(request):
 
 class ActivityUpdate(LoginRequiredMixin, UpdateView):
   model = Activity
+  form_class = ActivityForm
   fields = ['name', 'date', 'duration', 'start', 'location', 'attendees']
 
 class ActivityDelete(LoginRequiredMixin, DeleteView):
@@ -82,7 +83,7 @@ def add_proposal(request, activity_id):
     new_proposal = form.save(commit=False)
     new_proposal.user = request.user
     new_proposal.activity_id = activity_id
-    loc = requests.get(f'https://maps.googleapis.com/maps/api/geocode/json?&address={new_proposal.location}&key={GOOG_KEY}')
+    loc = requests.get(f'https://maps.googleapis.com/maps/api/geocode/json?&address={new_proposal.location}&key=AIzaSyAONpZhuVUksoDe9NWHsWLk6x44XumQiOY')
     data = json.loads(loc.text)['results']
     new_proposal.location = f"{data[0]['geometry']['location']['lat']}, {data[0]['geometry']['location']['lng']}"
     new_proposal.save()
