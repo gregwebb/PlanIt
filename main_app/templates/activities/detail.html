@@ -41,26 +41,27 @@
         </div>
 
         <div class="card-container">
+            <div class="proposals-container">
+                {% for proposal in activity.proposal_set.all %}
+                  <div class="proposal">
+                    <div class="proposal-details">{{proposal.user}}</div>
+                    <div class="proposal-time">
+                        Times Available:<br/>
+                        (Time Here) (Time Here)
+                    </div>
+                    <div class="proposal-content">
+                        Comments: <br/>{{proposal.suggestion}}
+                    </div>
+                  </div>
+                {% endfor %}
+          </div>
 
-            <table class="striped">
-                <tbody>
-                  {% for proposal in activity.proposal_set.all %}
-                      <br><tr>User: {{proposal.user}}</tr>
-                      <br/>
-                      <tr>Suggestion: {{proposal.suggestion}}</tr>
-                      <br/>
-                      <tr>Location: {{proposal.location}}</tr>
-                      <br/><br/>
-                  {% endfor %}
-                </tbody>
-              </table>
-
-              <div class="activity-content-container">
+              <div class="proposal-content-container">
                 {% if user_proposal %}
                 <form action="{% url 'update_proposal' activity.id %}" method="POST">
                     {% csrf_token %}
                     {{ proposal_update_form.as_p }}
-                    <input type="submit" class="create-btn" value="Update my proposal."><br><br>
+                    <input type="submit" class="create-btn" value="Update my proposal"><br><br>
                   </form>
                   {% else %}
                 <form action="{% url 'add_proposal' activity.id %}" method="post">
@@ -70,7 +71,7 @@
                   </form>
                 {% endif %}
             </div>
-
+            <br/>
     </div>
     <div class="card-container">
         <div id='map'>
@@ -104,19 +105,14 @@
 
         </div>
         <div class="card-container">
-
-            <table class="striped">
-                <tbody>
+            <div class="comments-container">
                   {% for comment in activity.comment_set.all %}
-                      <br><tr>User: {{comment.user}}</tr>
-                      <br/>
-                      <tr>Content: {{comment.content}}</tr>
-                      <br/>
-                      <tr>Posted At: {{comment.created}}</tr>
-                      <br/><br/>
+                    <div class="comment">
+                      <div class="comment-content">{{comment.content}}</div>
+                      <p class="comment-details">Posted By {{comment.user}} at: {{comment.created}}</p>
+                    </div>
                   {% endfor %}
-                </tbody>
-              </table>
+            </div>
 
               <div class="activity-content-container">
                 <form action="{% url 'add_comment' activity.id %}" method="post">
@@ -125,8 +121,7 @@
                     <input type="submit" class="create-btn" value="Comment"><br><br>
                   </form>
             </div>
-
-    </div>
+        </div>
 
 
 

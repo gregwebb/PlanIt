@@ -198,12 +198,87 @@ footer {
 
 #map {
     height: 400px;
+    border-radius: 30px;
 }
   
 h2 {
       color: #000;
 }
 
+.comments-container{
+    width: 85%;
+    margin: auto;
+    padding-top: 10px;
+}
+
+.comment{
+    margin-top: 5px;
+    border-style: solid;
+    border-color: rgb(11, 62, 77);
+    border-radius: 30px;
+    border-width: 2px;
+    padding: 10px;
+    text-align: left;
+}
+
+.comment-details{
+    text-align: right;
+    font-size: smaller;
+}
+
+.proposals-container{
+    width: 85%;
+    margin: auto;
+    padding-top: 10px;
+}
+
+.proposal{
+    margin-top: 5px;
+    border-style: solid;
+    border-color: rgb(11, 62, 77);
+    border-radius: 30px;
+    border-width: 2px;
+    padding: 10px;
+    text-align: left;
+}
+
+.proposal-details{
+    font-size: smaller;
+    border-radius: 30px;
+    background-color: cornflowerblue;
+    padding-left: 10px;
+}
+
+.proposal-content{
+    padding-left:15px;
+    margin-top: 5px;
+    border-radius: 30px;
+    background-color: white;
+    color: black;
+}
+
+.proposal-time{
+    padding-left:15px;
+    margin-top: 5px;
+    border-radius: 30px;
+    background-color: white;
+    color: black;
+}
+
+.proposal-content-container{
+    width: 85%;
+    border-radius: 30px;
+    border-style: solid;
+    border-color: rgb(11, 62, 77);
+    border-width: 2px;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.proposal-text-box{
+    width: 85%;
+    padding: 10px;
+}
 
 @media screen and (min-width: 550px){
     .navbar-container{

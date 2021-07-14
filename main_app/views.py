@@ -92,7 +92,10 @@ def activities_detail(request, activity_id):
     center = f"{sum_lng/len(coors)}, {sum_lat/len(coors)}"
   else: 
     center = "-98.4842, 39.0119"
-  user_proposal = Proposal.objects.filter(activity_id=activity_id).filter(user=request.user)
+  if request.user.id:
+    user_proposal = Proposal.objects.filter(activity_id=activity_id).filter(user=request.user)
+  else:
+    user_proposal = 0
   return render(request, 'activities/detail.html', {
     'activity': activity, 
     'proposal_form': proposal_form, 
