@@ -26,3 +26,9 @@ class Proposal(models.Model):
   user = models.ForeignKey(User, on_delete=models.CASCADE)
   suggestion = models.CharField(max_length=255)
   location = location = models.CharField(max_length=255)
+
+class Comment(models.Model):
+  activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
+  user = models.ForeignKey(User, on_delete=models.CASCADE)
+  content = models.CharField(max_length=255)
+  created = models.DateTimeField(auto_now_add=True)
