@@ -33,8 +33,35 @@
                         
     
                 </div>
+
+                
     
         </div>
+
+        <div class="card-container">
+    
+            <div class="activity-content-container">
+                <form action="{% url 'add_proposal' activity.id %}" method="post">
+                    {% csrf_token %}
+                    {{ proposal_form.as_p }}
+                    <input type="submit" class="btn" value="Add Proposal">
+                  </form>
+            </div>
+
+            <table class="striped">
+                <tbody>
+                  {% for proposal in activity.proposal_set.all %}
+                      <tr>User: {{proposal.user}}</tr>
+                      <br/>
+                      <tr>Suggestion: {{proposal.suggestion}}</tr>
+                      <br/>
+                      <tr>Location: {{proposal.location}}</tr>
+                      <br/><br/>
+                  {% endfor %}
+                </tbody>
+              </table>
+
+    </div>
 </div>
 
 
