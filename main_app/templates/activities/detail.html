@@ -56,11 +56,19 @@
               </table>
 
               <div class="activity-content-container">
+                {% if user_proposal %}
+                <form action="{% url 'update_proposal' activity.id %}" method="POST">
+                    {% csrf_token %}
+                    {{ proposal_update_form.as_p }}
+                    <input type="submit" class="create-btn" value="Update my proposal."><br><br>
+                  </form>
+                  {% else %}
                 <form action="{% url 'add_proposal' activity.id %}" method="post">
                     {% csrf_token %}
                     {{ proposal_form.as_p }}
-                    <input type="submit" class="create-btn" value="ADD PROPOSAL"><br><br>
+                    <input type="submit" class="create-btn" value="I would like to attend!"><br><br>
                   </form>
+                {% endif %}
             </div>
 
     </div>
@@ -87,7 +95,8 @@
             {% for proposal in activity.proposal_set.all %}
             marker = new mapboxgl.Marker()
             .setLngLat([{{ proposal.location }}])
-            .setPopup(new mapboxgl.Popup().setHTML("<h2>{{ proposal.user.username }}</h2>"))
+            .setPopup(new mapboxgl.Popup()
+            .setHTML("<h2>{{ proposal.suggestion }} <br/><br/>  - {{ proposal.user.username }} </h2>"))
             .addTo(map)
             {% endfor %}
             </script>

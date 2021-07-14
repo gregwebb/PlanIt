@@ -21,7 +21,20 @@ class ActivityForm(ModelForm):
 class ProposalForm(ModelForm):
   class Meta:
     model = Proposal
-    fields = ['suggestion', 'location']
+    fields = ['location', 'suggestion']
+    labels = {
+      'location': ('Where would you like to go? / What area are you going to be at?: (Include City)'),
+      'suggestion': ('Add any additional info here:'),
+    }
+
+class ProposalUpdateForm(ModelForm):
+  class Meta:
+    model = Proposal
+    fields = ['location', 'suggestion']
+    labels = {
+      'location': ('Where would you like to go? / What area are you going to be at?: (Include City)'),
+      'suggestion': ('Add any additional info here:'),
+    }
 
 class CommentForm(ModelForm):
   class Meta:
