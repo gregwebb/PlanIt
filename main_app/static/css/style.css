@@ -98,7 +98,7 @@ main {
 .main-activity-list {
     margin: auto;
     height: 600px;
-    width: 500px;
+    width: 700px;
     overflow-y: auto;
     position: relative;
     border: inset grey;
