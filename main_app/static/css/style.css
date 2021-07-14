@@ -173,6 +173,13 @@ footer {
     overflow: hidden;
 }
 
+#map {
+    height: 400px;
+  }
+  
+h2 {
+      color: #000;
+  }
 
 
 @media screen and (min-width: 550px){
@@ -200,3 +207,4 @@ footer {
         padding-right: 15px;
     }
 }
+
