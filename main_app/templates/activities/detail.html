@@ -62,11 +62,29 @@
               </table>
 
     </div>
-</div>
-
+    <div class="card-container">
+        <div id='map'>
+            <script>
+            mapboxgl.accessToken = 'pk.eyJ1IjoiZ3JlZ3dlYmIiLCJhIjoiY2tyMzExajNyMjk3cDJ1cnpzc2NtZ3djYyJ9._v1_Nt8M_bbJrkC1yB7qeQ';
+            let map = new mapboxgl.Map({
+                container: 'map',
+                style: 'mapbox://styles/mapbox/streets-v11',
+                center: [-105.0116441, 39.72042513],
+                zoom: 9
+            });
+            map.addControl(new mapboxgl.NavigationControl());
+            let marker = "";
+            {% for proposal in activity.proposal_set.all %}
+            marker = new mapboxgl.Marker()
+            .setLngLat([{{ proposal.location }}])
+            .setPopup(new mapboxgl.Popup().setHTML("<h2>{{ proposal.user.username }}</h2>"))
+            .addTo(map)
+            {% endfor %}
+            </script>
+        </div>
+    </div>
 
     
-
 
 {% endblock content %}
     

@@ -25,7 +25,6 @@ with open(BASE_DIR/'config.json') as config_file:
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-=uv)@lkg#k43wkd=z$@ww7tnmrxk$l#*xhf#nv$mir2zk-aigw'
-GOOG_KEY = config['GOOG_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
