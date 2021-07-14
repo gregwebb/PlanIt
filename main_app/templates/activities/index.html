@@ -9,7 +9,7 @@
         <div class="card-container">
             <a href="{% url 'detail' activity.id %}">
                 <div class="activity-content-container">
-                    <h3 class="activity-name">{{ activity.name }}</h3>
+                    <h3 class="activity-name">{{ activity.name }} with ({{ activity.user }})</h3>
                     <div class="activity-description-container">
                         <p>CATEGORY: {{ activity.category }}</p>
                         <p>DATE: {{ activity.date }}</p>

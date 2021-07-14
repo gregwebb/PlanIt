@@ -36,15 +36,15 @@ def signup(request):
 
 @login_required
 def create_activity(request):
-  activity_form = ActivityForm(request.POST)
-  if activity_form.is_valid():
-    new_activity = activity_form.save()(commit=False)
+  form = ActivityForm(request.POST)
+  if form.is_valid():
+    new_activity = form.save(commit=False)
     new_activity.user = request.user
-    new_activity.save()
+    form.save()
     return redirect('index')
 
   return render(request, 'main_app/activity_form.html', {
-    'activity_form': activity_form
+    'form': form
   })
 
 class ActivityUpdate(LoginRequiredMixin, UpdateView, ModelFormMixin):
