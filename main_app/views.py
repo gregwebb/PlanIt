@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.conf import settings
 
+
 import requests, json
 
 GOOG_KEY = getattr(settings, "GOOG_KEY", None)
