@@ -57,7 +57,11 @@ class ActivityDelete(LoginRequiredMixin, DeleteView):
   success_url = '/activities/'
 
 def home(request):
-  return render(request, 'home.html')
+  if request.user.is_authenticated:
+    activities = Activity.objects.filter(user=request.user)
+    return render(request, 'home.html', { 'activities': activities })
+  else:
+    return render(request, 'home.html')
 
 def activities_index(request):
   activities = Activity.objects.all()
@@ -66,8 +70,22 @@ def activities_index(request):
 def activities_detail(request, activity_id):
   activity = Activity.objects.get(id=activity_id)
   proposal_form = ProposalForm()
+  proposals = Proposal.objects.filter(activity_id=activity_id)
+  coors = []
+  new_coors = []
+  sum_lng = 0
+  sum_lat = 0
+  for proposal in proposals:
+    coors.append(proposal.location)
+  for item in coors:
+    result = [x.strip() for x in item.split(',')]
+    new_coors.append(result)
+  for item in new_coors:
+    sum_lng = sum_lng + float(item[0])
+    sum_lat = sum_lat + float(item[1])
+  center = f"{sum_lng/len(coors)}, {sum_lat/len(coors)}"
   return render(request, 'activities/detail.html', {
-    'activity': activity, 'proposal_form': proposal_form
+    'activity': activity, 'proposal_form': proposal_form, 'center': center
   })
 
 class ProposalCreate(LoginRequiredMixin, CreateView):
@@ -88,6 +106,6 @@ def add_proposal(request, activity_id):
     new_proposal.activity_id = activity_id
     loc = requests.get(f'https://maps.googleapis.com/maps/api/geocode/json?&address={new_proposal.location}&key=AIzaSyAONpZhuVUksoDe9NWHsWLk6x44XumQiOY')
     data = json.loads(loc.text)['results']
-    new_proposal.location = f"{data[0]['geometry']['location']['lat']}, {data[0]['geometry']['location']['lng']}"
+    new_proposal.location = f"{data[0]['geometry']['location']['lng']}, {data[0]['geometry']['location']['lat']}"
     new_proposal.save()
   return redirect('detail', activity_id=activity_id)

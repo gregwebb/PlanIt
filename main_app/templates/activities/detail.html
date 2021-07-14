@@ -16,8 +16,9 @@
                         <p>DURATION: {{ activity.duration }}</p>
                         <p>START: {{ activity.start }}</p>
                         <p>LOCATION: {{ activity.location }}</p>
-                        <p>ATTENDEES: {{ activity.attendees }}</p>
+                        <p>ATTENDEES: {{ activity.attendees }}</p><br>
                     </div>
+                    {% if user == activity.user %}
                     <div class="button-container">
                         <div class="edit-delete-container">
                             <form action="{% url 'activities_update' activity.id %}">
@@ -30,6 +31,7 @@
                         </div>
 
                     </div>
+                    {% endif %}
                         
     
                 </div>
@@ -39,19 +41,11 @@
         </div>
 
         <div class="card-container">
-    
-            <div class="activity-content-container">
-                <form action="{% url 'add_proposal' activity.id %}" method="post">
-                    {% csrf_token %}
-                    {{ proposal_form.as_p }}
-                    <input type="submit" class="btn" value="Add Proposal">
-                  </form>
-            </div>
 
             <table class="striped">
                 <tbody>
                   {% for proposal in activity.proposal_set.all %}
-                      <tr>User: {{proposal.user}}</tr>
+                      <br><tr>User: {{proposal.user}}</tr>
                       <br/>
                       <tr>Suggestion: {{proposal.suggestion}}</tr>
                       <br/>
@@ -61,11 +55,46 @@
                 </tbody>
               </table>
 
+              <div class="activity-content-container">
+                <form action="{% url 'add_proposal' activity.id %}" method="post">
+                    {% csrf_token %}
+                    {{ proposal_form.as_p }}
+                    <input type="submit" class="create-btn" value="ADD PROPOSAL"><br><br>
+                  </form>
+            </div>
+
     </div>
-</div>
+    <div class="card-container">
+        <div id='map'>
+            <script>
+            mapboxgl.accessToken = 'pk.eyJ1IjoiZ3JlZ3dlYmIiLCJhIjoiY2tyMzExajNyMjk3cDJ1cnpzc2NtZ3djYyJ9._v1_Nt8M_bbJrkC1yB7qeQ';
+            let map = new mapboxgl.Map({
+                container: 'map',
+                style: 'mapbox://styles/mapbox/streets-v11',
+                center: [{{ center }}],
+                zoom: 11
+            });
+            map.addControl(
+                new MapboxGeocoder({
+                    accessToken: 'pk.eyJ1IjoiZ3JlZ3dlYmIiLCJhIjoiY2tyMzExajNyMjk3cDJ1cnpzc2NtZ3djYyJ9._v1_Nt8M_bbJrkC1yB7qeQ',
+                    mapboxgl: mapboxgl
+                })
+                );
+            map.addControl(
+                new mapboxgl.
+                NavigationControl());
+            let marker = "";
+            {% for proposal in activity.proposal_set.all %}
+            marker = new mapboxgl.Marker()
+            .setLngLat([{{ proposal.location }}])
+            .setPopup(new mapboxgl.Popup().setHTML("<h2>{{ proposal.user.username }}</h2>"))
+            .addTo(map)
+            {% endfor %}
+            </script>
 
 
-    
+        </div>
+    </div>
 
 
 {% endblock content %}
