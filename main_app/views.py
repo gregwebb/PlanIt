@@ -36,29 +36,24 @@ def signup(request):
 
 @login_required
 def create_activity(request):
-<<<<<<< HEAD
   activity_form = ActivityForm(request.POST)
   if activity_form.is_valid():
     new_activity = activity_form.save()(commit=False)
-    new_activity.instance.user = request.user
+    new_activity.user = request.user
     new_activity.save()
-=======
-  form = ActivityForm(request.POST)
-  if form.is_valid():
-    form.save()
->>>>>>> master
     return redirect('index')
 
   return render(request, 'main_app/activity_form.html', {
-    'form': form
+    'activity_form': activity_form
   })
 
-class ActivityUpdate(LoginRequiredMixin, UpdateView):
+class ActivityUpdate(LoginRequiredMixin, UpdateView, ModelFormMixin):
   model = Activity
   form_class = ActivityForm
+  def post(self, request, pk):
+    request.POST = request.POST.copy()
+    return super(ActivityUpdate, self).post(request, pk)
 
-  def form_valid(self, form):
-      return super().form_valid(form)
 
 class ActivityDelete(LoginRequiredMixin, DeleteView):
   model = Activity
