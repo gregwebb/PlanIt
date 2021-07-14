@@ -41,6 +41,12 @@ nav {
     padding: 0;
 }
 
+.nav-wrapper-right ul {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
 nav li{
     list-style: none;
     
@@ -181,6 +187,12 @@ footer {
         position: absolute;
         right: 15px;
     }
+
+    .nav-wrapper-right ul {
+        display: flex;
+        flex-direction: row;
+    }
+
     nav li:first-child {
         padding-left: 30px;
     }
