@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, ModelFormMixin
 from .models import Activity, Proposal, Comment
 
-from .forms import ActivityForm, ProposalForm, CommentForm
+from .forms import ActivityForm, ProposalForm, CommentForm, ProposalUpdateForm
 
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
@@ -73,6 +73,7 @@ def activities_index(request):
 def activities_detail(request, activity_id):
   activity = Activity.objects.get(id=activity_id)
   proposal_form = ProposalForm()
+  proposal_update_form = ProposalUpdateForm()
   comment_form = CommentForm()
   proposals = Proposal.objects.filter(activity_id=activity_id)
   coors = []
@@ -91,8 +92,14 @@ def activities_detail(request, activity_id):
     center = f"{sum_lng/len(coors)}, {sum_lat/len(coors)}"
   else: 
     center = "-98.4842, 39.0119"
+  user_proposal = Proposal.objects.filter(activity_id=activity_id).filter(user=request.user)
   return render(request, 'activities/detail.html', {
-    'activity': activity, 'proposal_form': proposal_form, 'center': center, 'comment_form': comment_form,
+    'activity': activity, 
+    'proposal_form': proposal_form, 
+    'center': center, 
+    'comment_form': comment_form, 
+    'user_proposal': user_proposal,
+    'proposal_update_form': proposal_update_form, 
   })
 
 class ProposalCreate(LoginRequiredMixin, CreateView):
@@ -115,6 +122,20 @@ def add_proposal(request, activity_id):
     data = json.loads(loc.text)['results']
     new_proposal.location = f"{data[0]['geometry']['location']['lng']}, {data[0]['geometry']['location']['lat']}"
     new_proposal.save()
+  return redirect('detail', activity_id=activity_id)
+
+def update_proposal(request, activity_id):
+  form = ProposalUpdateForm(request.POST)
+  if form.is_valid():
+    update_proposal = form.save(commit=False)
+    existing_proposal = Proposal.objects.filter(activity_id=activity_id).filter(user=request.user).first()
+    update_proposal.id = existing_proposal.id
+    update_proposal.activity_id = activity_id
+    update_proposal.user = request.user
+    loc = requests.get(f'https://maps.googleapis.com/maps/api/geocode/json?&address={update_proposal.location}&key=AIzaSyAONpZhuVUksoDe9NWHsWLk6x44XumQiOY')
+    data = json.loads(loc.text)['results']
+    update_proposal.location = f"{data[0]['geometry']['location']['lng']}, {data[0]['geometry']['location']['lat']}"
+    update_proposal.save()
   return redirect('detail', activity_id=activity_id)
 
 def add_comment(request, activity_id):
