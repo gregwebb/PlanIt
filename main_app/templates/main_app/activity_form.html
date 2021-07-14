@@ -11,7 +11,7 @@
     <form action="" method="post" id="add-activity-form">
       {% csrf_token %}
       <table>
-        {{ form.as_table }}
+        {{ activity_form.as_table }}
       </table>
       <input type="submit" value="Submit!" class="create-btn" id="add-activity-btn">
     </form>

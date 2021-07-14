@@ -41,11 +41,21 @@ nav {
     padding: 0;
 }
 
+.nav-wrapper-right ul {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
 nav li{
     list-style: none;
     
     padding-right: 5px;
     padding-bottom: 5px;
+}
+
+main {
+    margin-bottom: 40px;
 }
 
 .title {
@@ -79,12 +89,12 @@ nav li{
     animation-delay: 0s;
 }
 footer {
-    position: absolute;
+    position: fixed;
     margin-left: auto;
     margin-right: auto;
     left:0;
     right:0;
-    bottom: 10px;
+    bottom: 0;
 }
 @-webkit-keyframes slide {
     100% { left: 0; right: 0;}
@@ -111,7 +121,10 @@ footer {
 .edit-delete-container {
     justify-content: center;
     padding: 10px;
+    display: flex;
+    flex-direction: row;
 }
+
 .create-btn, .log-in-btn {
     background-image: linear-gradient(120deg, #ddf7ff 0%, #86cfff 100%);
     box-shadow: 2px 4px 25px rgba(0,0,0,.1);
@@ -160,11 +173,7 @@ footer {
     overflow: hidden;
 }
 
-.edit-delete-container {
-    display: flex;
-    flex-direction: row;
 
-}
 
 @media screen and (min-width: 550px){
     .navbar-container{
@@ -178,6 +187,12 @@ footer {
         position: absolute;
         right: 15px;
     }
+
+    .nav-wrapper-right ul {
+        display: flex;
+        flex-direction: row;
+    }
+
     nav li:first-child {
         padding-left: 30px;
     }
