@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Activity, Proposal
-from .forms import ProposalForm
+
+from .forms import ActivityForm, ProposalForm
 
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
@@ -30,15 +31,18 @@ def signup(request):
   form = UserCreationForm()
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
-  
 
-class ActivityCreate(LoginRequiredMixin, CreateView):
-  model = Activity
-  fields = ['name', 'category', 'date', 'duration', 'start', 'location', 'attendees']
 
-  def form_valid(self, form):
-    form.instance.user = self.request.user
-    return super().form_valid(form)
+@login_required
+def create_activity(request):
+  activity_form = ActivityForm(request.POST)
+  if activity_form.is_valid():
+    activity_form.save()
+    return redirect('index')
+
+  return render(request, 'main_app/activity_form.html', {
+    'activity_form': activity_form
+  })
 
 class ActivityUpdate(LoginRequiredMixin, UpdateView):
   model = Activity
