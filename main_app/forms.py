@@ -24,8 +24,12 @@ class ProposalForm(ModelForm):
     model = Proposal
     fields = ['location', 'suggestion']
     labels = {
-      'location': ('Where would you like to go? / What area are you going to be at?: (Include City)'),
-      'suggestion': ('Add any additional info here:'),
+      'location': (''),
+      'suggestion': (''),
+    }
+    widgets = {
+      'suggestion': forms.Textarea(attrs={"rows":2, 'placeholder':'add any additional info here', 'style': 'border-radius: 30px', 'class': 'proposal-text-box'}),
+      'location': forms.Textarea(attrs={"rows":2,'placeholder':'add location preference here - helpful to include city ', 'style': 'border-radius: 30px', 'class': 'proposal-text-box'})
     }
 
 class ProposalUpdateForm(ModelForm):
@@ -38,7 +42,7 @@ class ProposalUpdateForm(ModelForm):
     }
     widgets = {
       'suggestion': forms.Textarea(attrs={"rows":2, 'placeholder':'add any additional info here', 'style': 'border-radius: 30px', 'class': 'proposal-text-box'}),
-      'location': forms.Textarea(attrs={"rows":2, "cols":40,'placeholder':'add location preference here - helpful to include city ', 'style': 'border-radius: 30px', 'class': 'proposal-text-box'})
+      'location': forms.Textarea(attrs={"rows":2,'placeholder':'add location preference here - helpful to include city ', 'style': 'border-radius: 30px', 'class': 'proposal-text-box'})
     }
 
 class CommentForm(ModelForm):
@@ -49,5 +53,5 @@ class CommentForm(ModelForm):
       'content': ('')
     }
     widgets = {
-      'content': forms.Textarea(attrs={"rows":5, "cols":40,'placeholder':'add comment here', 'style': 'border-radius: 30px'}),
+      'content': forms.Textarea(attrs={"rows":5, 'placeholder':'add comment here', 'style': 'border-radius: 30px', 'class': 'comment-text-box'}),
     } 

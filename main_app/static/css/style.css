@@ -280,6 +280,11 @@ h2 {
     padding: 10px;
 }
 
+.comment-text-box{
+    width: 85%;
+    padding: 10px;
+}
+
 @media screen and (min-width: 550px){
     .navbar-container{
         flex-direction: row;
