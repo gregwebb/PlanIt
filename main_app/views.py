@@ -66,8 +66,22 @@ def activities_index(request):
 def activities_detail(request, activity_id):
   activity = Activity.objects.get(id=activity_id)
   proposal_form = ProposalForm()
+  proposals = Proposal.objects.filter(activity_id=activity_id)
+  coors = []
+  new_coors = []
+  sum_lng = 0
+  sum_lat = 0
+  for proposal in proposals:
+    coors.append(proposal.location)
+  for item in coors:
+    result = [x.strip() for x in item.split(',')]
+    new_coors.append(result)
+  for item in new_coors:
+    sum_lng = sum_lng + float(item[0])
+    sum_lat = sum_lat + float(item[1])
+  center = f"{sum_lng/len(coors)}, {sum_lat/len(coors)}"
   return render(request, 'activities/detail.html', {
-    'activity': activity, 'proposal_form': proposal_form
+    'activity': activity, 'proposal_form': proposal_form, 'center': center
   })
 
 class ProposalCreate(LoginRequiredMixin, CreateView):
