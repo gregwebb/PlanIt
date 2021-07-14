@@ -29,10 +29,10 @@ class Proposal(models.Model):
   suggestion = models.CharField(max_length=255)
   location = location = models.CharField(max_length=255)
 
-  def save(self, *args, **kwargs):
-    loc = requests.get(f'https://maps.googleapis.com/maps/api/geocode/json?&address={self.location}&key={GOOG_KEY}')
-    data = json.loads(loc.text)['results']
-    self.location = f"{data[0]['geometry']['location']['lat']}, {data[0]['geometry']['location']['lng']}"
-    super().save(*args, **kwargs)
+  #def save(self, *args, **kwargs):
+   # loc = requests.get(f'https://maps.googleapis.com/maps/api/geocode/json?&address={self.location}&key={GOOG_KEY}')
+    #data = json.loads(loc.text)['results']
+    #self.location = f"{data[0]['geometry']['location']['lat']}, {data[0]['geometry']['location']['lng']}"
+    #super().save(*args, **kwargs)
 
 
