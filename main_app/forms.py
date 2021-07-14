@@ -7,7 +7,7 @@ from django.forms.widgets import TextInput
 class ActivityForm(ModelForm):
     class Meta:
         model = Activity
-        fields = ['name', 'category', 'date', 'duration', 'start', 'location', 'attendees', 'user']
+        fields = ['name', 'category', 'date', 'duration', 'start', 'location', 'attendees']
         widgets = {
             'date': forms.DateInput(format=('%d-%m-%Y'), attrs={'firstDay': 1, 'pattern=': '\d{4}-\d{2}-\d{2}', 'lang': 'pl', 'format': 'yyyy-mm-dd', 'type': 'date'}),
             'duration': TextInput(attrs={'placeholder': '00 day 00:00:00'}),
