@@ -101,6 +101,11 @@ main {
     width: 500px;
     overflow-y: auto;
     position: relative;
+    border: inset grey;
+    border-width: 2px;
+}
+.main-activity-list::-webkit-scrollbar {
+    display: none;
 }
 footer {
     position: fixed;

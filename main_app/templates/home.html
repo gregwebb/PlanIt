@@ -6,7 +6,7 @@
         <h1 class="main-welcome-title">WELCOME TO PlanIt!</h1>
         
         {% if user.is_authenticated %}
-            <h2>Here Are Your Activities</h2>
+            <h2 class="title">Here Are Your Activities</h2>
             <div class="main-activity-box">
             <div class="main-activity-list">
                 {% for activity in activities %}
