@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView, ModelFormMixin
 from .models import Activity, Proposal
 
 from .forms import ActivityForm, ProposalForm
@@ -44,10 +44,10 @@ def create_activity(request):
     'activity_form': activity_form
   })
 
-class ActivityUpdate(LoginRequiredMixin, UpdateView):
+class ActivityUpdate(LoginRequiredMixin, UpdateView, ModelFormMixin):
   model = Activity
-  form_class = ActivityForm
-  fields = ['name', 'date', 'duration', 'start', 'location', 'attendees']
+  activity_form = ActivityForm
+
 
 class ActivityDelete(LoginRequiredMixin, DeleteView):
   model = Activity
