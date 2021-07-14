@@ -191,6 +191,15 @@ footer {
     color: rgb(11, 62, 77);
 }
 
+#map {
+    height: 400px;
+}
+  
+h2 {
+      color: #000;
+}
+
+
 @media screen and (min-width: 550px){
     .navbar-container{
         flex-direction: row;
@@ -216,3 +225,4 @@ footer {
         padding-right: 15px;
     }
 }
+

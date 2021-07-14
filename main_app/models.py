@@ -3,9 +3,6 @@ from django.urls import reverse
 from django.contrib.postgres.fields import ArrayField, DateTimeRangeField
 from django.contrib.auth.models import User
 from django.conf import settings
-import requests, json 
-
-GOOG_KEY = getattr(settings, "GOOG_KEY", None)
 
 
 class Activity(models.Model):
