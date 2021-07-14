@@ -79,7 +79,10 @@ def activities_detail(request, activity_id):
   for item in new_coors:
     sum_lng = sum_lng + float(item[0])
     sum_lat = sum_lat + float(item[1])
-  center = f"{sum_lng/len(coors)}, {sum_lat/len(coors)}"
+  if len(proposals)>0:
+    center = f"{sum_lng/len(coors)}, {sum_lat/len(coors)}"
+  else: 
+    center = "-98.4842, 39.0119"
   return render(request, 'activities/detail.html', {
     'activity': activity, 'proposal_form': proposal_form, 'center': center
   })
