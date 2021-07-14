@@ -38,7 +38,9 @@ def signup(request):
 def create_activity(request):
   activity_form = ActivityForm(request.POST)
   if activity_form.is_valid():
-    activity_form.save()
+    new_activity = activity_form.save()(commit=False)
+    new_activity.instance.user = request.user
+    new_activity.save()
     return redirect('index')
 
   return render(request, 'main_app/activity_form.html', {
