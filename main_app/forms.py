@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Proposal, Activity
+from .models import Proposal, Activity, Comment
 
 from django.forms.widgets import TextInput
 from django.utils.dateparse import parse_duration
@@ -20,3 +20,8 @@ class ProposalForm(ModelForm):
   class Meta:
     model = Proposal
     fields = ['suggestion', 'location']
+
+class CommentForm(ModelForm):
+  class Meta:
+    model = Comment
+    fields = ['content']

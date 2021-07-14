@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, ModelFormMixin
-from .models import Activity, Proposal
+from .models import Activity, Proposal, Comment
 
-from .forms import ActivityForm, ProposalForm
+from .forms import ActivityForm, ProposalForm, CommentForm
 
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
@@ -70,6 +70,7 @@ def activities_index(request):
 def activities_detail(request, activity_id):
   activity = Activity.objects.get(id=activity_id)
   proposal_form = ProposalForm()
+  comment_form = CommentForm()
   proposals = Proposal.objects.filter(activity_id=activity_id)
   coors = []
   new_coors = []
@@ -88,7 +89,7 @@ def activities_detail(request, activity_id):
   else: 
     center = "-98.4842, 39.0119"
   return render(request, 'activities/detail.html', {
-    'activity': activity, 'proposal_form': proposal_form, 'center': center
+    'activity': activity, 'proposal_form': proposal_form, 'center': center, 'comment_form': comment_form,
   })
 
 class ProposalCreate(LoginRequiredMixin, CreateView):
@@ -111,4 +112,13 @@ def add_proposal(request, activity_id):
     data = json.loads(loc.text)['results']
     new_proposal.location = f"{data[0]['geometry']['location']['lng']}, {data[0]['geometry']['location']['lat']}"
     new_proposal.save()
+  return redirect('detail', activity_id=activity_id)
+
+def add_comment(request, activity_id):
+  form = CommentForm(request.POST)
+  if form.is_valid():
+    new_comment = form.save(commit=False)
+    new_comment.user = request.user
+    new_comment.activity_id = activity_id
+    new_comment.save()
   return redirect('detail', activity_id=activity_id)
