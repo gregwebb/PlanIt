@@ -11,6 +11,7 @@
                 {% csrf_token %}
                 {{form.as_p}}
                 <br>
+                
                 <input type="submit" class="log-in-btn" value="signup">
                 <input type="hidden" name="next" value="{{ next }}">
             </form>

@@ -14,6 +14,10 @@ a {
     text-decoration: none;
 }
 
+a:hover {
+    color: #86cfff;
+}
+
 #logo {
     font-family: 'Poiret One', cursive;
     font-size: 40px;
@@ -87,6 +91,16 @@ main {
     -webkit-animation-delay: 2s;
     animation: slide 1.0s forwards;
     animation-delay: 0s;
+}
+.main-welcome-title {
+    margin-top: -150px;
+}
+.main-activity-list {
+    margin: auto;
+    height: 600px;
+    width: 500px;
+    overflow-y: auto;
+    position: relative;
 }
 footer {
     position: fixed;
@@ -173,13 +187,17 @@ footer {
     overflow: hidden;
 }
 
+.login-btn {
+    color: rgb(11, 62, 77);
+}
+
 #map {
     height: 400px;
-  }
+}
   
 h2 {
       color: #000;
-  }
+}
 
 
 @media screen and (min-width: 550px){

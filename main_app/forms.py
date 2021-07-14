@@ -6,7 +6,7 @@ class ActivityForm(ModelForm):
     
     class Meta:
         model = Activity
-        fields = ['name', 'category', 'date', 'duration', 'start', 'location', 'attendees']
+        fields = ['name', 'category', 'date', 'duration', 'start', 'location', 'attendees', 'user']
         widgets = {
             'date': forms.DateInput(format=('%d-%m-%Y'), attrs={'firstDay': 1, 'pattern=': '\d{4}-\d{2}-\d{2}', 'lang': 'pl', 'format': 'yyyy-mm-dd', 'type': 'date'}),
         }
