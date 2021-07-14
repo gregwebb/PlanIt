@@ -48,6 +48,10 @@ nav li{
     padding-bottom: 5px;
 }
 
+main {
+    margin-bottom: 40px;
+}
+
 .title {
     color: white;
 }
@@ -79,12 +83,12 @@ nav li{
     animation-delay: 0s;
 }
 footer {
-    position: absolute;
+    position: fixed;
     margin-left: auto;
     margin-right: auto;
     left:0;
     right:0;
-    bottom: 10px;
+    bottom: 0;
 }
 @-webkit-keyframes slide {
     100% { left: 0; right: 0;}
