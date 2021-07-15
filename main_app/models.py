@@ -15,8 +15,8 @@ class Activity(models.Model):
   duration = models.DurationField()
   start = models.TimeField()
   location = models.CharField(max_length=255)
-  attendees = ArrayField((models.IntegerField()))
-  user = models.ForeignKey(User, on_delete=models.CASCADE)
+  attendees = models.ManyToManyField(User, related_name='attend_user')
+  user = models.ForeignKey(User, related_name='user_FK', on_delete=models.CASCADE)
   
   def get_absolute_url(self):
     return reverse('detail', kwargs={'activity_id': self.id})

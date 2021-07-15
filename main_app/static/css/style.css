@@ -156,7 +156,7 @@ footer {
 
 .create-btn:hover, .log-in-btn:hover {
     background-image: linear-gradient(120deg, #43d2fd 0%, #cce5f7 100%);
-    box-shadow: 4px 4px 30px rgba(0,0,0,.4);
+    box-shadow: 4px 4px 30px rgba(0,0,0,.25);
     overflow: hidden;
 }
 
@@ -172,11 +172,11 @@ footer {
 
 .edit-btn:hover {
     background-image: linear-gradient(120deg, #91fc2e 0%, #f7f3cc 100%);
-    box-shadow: 4px 4px 30px rgba(0,0,0,.4);
+    box-shadow: 4px 4px 30px rgba(0,0,0,.25);
     overflow: hidden;
 }
 
-.delete-btn {
+.delete-btn, .attend-btn {
     background-image: linear-gradient(120deg, #ffdde7 0%, #ff4583 100%);
     box-shadow: 2px 4px 25px rgba(0,0,0,.1);
     overflow: hidden;
@@ -186,12 +186,27 @@ footer {
     color: rgb(85, 10, 23);
 }
 
-.delete-btn:hover {
+.delete-btn:hover, .attend-btn:hover {
     background-image: linear-gradient(120deg, #fd436b 0%, #f7ccda 100%);
-    box-shadow: 4px 4px 30px rgba(0,0,0,.4);
+    box-shadow: 4px 4px 30px rgba(0,0,0,.25);
     overflow: hidden;
 }
 
+.attend-remove-btn {
+    background-image: linear-gradient(120deg, #f8ddff 0%, #5e30a8 100%);
+    box-shadow: 2px 4px 25px rgba(0,0,0,.1);
+    overflow: hidden;
+    padding: 10px;
+    border-style: solid;
+    border-radius: 30px;
+    color: rgb(85, 10, 23);
+}
+
+.attend-remove-btn:hover {
+    background-image: linear-gradient(120deg, #a943fd 0%, #f0ccf7 100%);
+    box-shadow: 4px 4px 30px rgba(0,0,0,.25);
+    overflow: hidden;
+}
 .login-btn {
     color: rgb(11, 62, 77);
 }

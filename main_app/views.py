@@ -45,12 +45,12 @@ def create_activity(request):
     'form': form
   })
 
-class ActivityUpdate(LoginRequiredMixin, UpdateView, ModelFormMixin):
+
+class ActivityUpdate(LoginRequiredMixin, UpdateView):
   model = Activity
   form_class = ActivityForm
-  def post(self, request, pk):
-    request.POST = request.POST.copy()
-    return super(ActivityUpdate, self).post(request, pk)
+  def form_valid(self, form):
+    return super().form_valid(form)
 
 
 class ActivityDelete(LoginRequiredMixin, DeleteView):
@@ -170,4 +170,20 @@ def add_comment(request, activity_id):
     new_comment.user = request.user
     new_comment.activity_id = activity_id
     new_comment.save()
+  return redirect('detail', activity_id=activity_id)
+
+@login_required
+def add_attendee(request, activity_id):
+  activity = Activity.objects.get(id=activity_id)
+  if activity.attendees.all().filter(username=request.user) != True:
+    activity.attendees.add(request.user)
+  else:
+    pass
+  return redirect('detail', activity_id=activity_id)
+
+@login_required
+def remove_attendee(request, activity_id):
+  activity = Activity.objects.get(id=activity_id)
+  activity.attendees.remove(request.user)
+
   return redirect('detail', activity_id=activity_id)

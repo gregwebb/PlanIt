@@ -3,8 +3,9 @@
 {% block content %}
 <div class="main-container">
   <div class="card-container">
-    {% if object %}
-      <h1>Edit <span>{{object.name}}</span></h1>
+    {% if activity %}
+      <h1>Edit <span>{{activity.name}}</span></h1>
+      <p>Original Date: {{ activity.date }}</p>
     {% else %}
       <h1>Add Activity</h1>
     {% endif %}
