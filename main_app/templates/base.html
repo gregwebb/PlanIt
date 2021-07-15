@@ -33,7 +33,9 @@
                     </ul>
                 </div>
                 <div class="search">
+                <form method="get" action="{% url 'search_results' %}">
                     <input type="text" name="q" class="searchTerm" placeholder="Find an activity...">
+                </form>
                 </div>
                 <div class='nav-wrapper-right'>
                     <ul>
