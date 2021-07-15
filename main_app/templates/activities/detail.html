@@ -47,7 +47,24 @@
                     <div class="proposal-details">{{proposal.user}}</div>
                     <div class="proposal-time">
                         Times Available:<br/>
-                        (Time Here) (Time Here)
+                        {% if proposal.begin|length == 1 %}
+                        <div class="time">{{proposal.begin.0}} - {{proposal.finish.0}}</div>
+                        {% elif proposal.begin|length == 2 %}
+                        <div class="time">{{proposal.begin.0}} - {{proposal.finish.0}}</div>
+                        <div class="time-two">{{proposal.begin.1}} - {{proposal.finish.1}}</div>
+                        {% elif proposal.begin|length == 3 %}
+                        <div class="time-three">{{proposal.begin.0}} - {{proposal.finish.0}}</div>
+                        <div class="time-four">{{proposal.begin.1}} - {{proposal.finish.1}}</div>
+                        <div class="time-four">{{proposal.begin.2}} - {{proposal.finish.2}}</div>
+                        {% elif proposal.begin|length == 4 %}
+                        <div class="time-three">{{proposal.begin.0}} - {{proposal.finish.0}}</div>
+                        <div class="time-four">{{proposal.begin.1}} - {{proposal.finish.1}}</div>
+                        <div class="time-four">{{proposal.begin.2}} - {{proposal.finish.2}}</div>
+                        <div class="time-four">{{proposal.begin.3}} - {{proposal.finish.3}}</div>
+                        {% else %}
+                        <div class="no-time">{{proposal.user}} has not entered availability</div>
+                        {% endif %}
+                       
                     </div>
                     <div class="proposal-content">
                         Comments: <br/>{{proposal.suggestion}}
