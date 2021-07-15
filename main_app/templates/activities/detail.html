@@ -53,14 +53,20 @@
                         <div class="time">{{proposal.begin.0}} - {{proposal.finish.0}}</div>
                         <div class="time-two">{{proposal.begin.1}} - {{proposal.finish.1}}</div>
                         {% elif proposal.begin|length == 3 %}
-                        <div class="time-three">{{proposal.begin.0}} - {{proposal.finish.0}}</div>
-                        <div class="time-four">{{proposal.begin.1}} - {{proposal.finish.1}}</div>
-                        <div class="time-four">{{proposal.begin.2}} - {{proposal.finish.2}}</div>
+                        <div class="time">{{proposal.begin.0}} - {{proposal.finish.0}}</div>
+                        <div class="time-two">{{proposal.begin.1}} - {{proposal.finish.1}}</div>
+                        <div class="time-three">{{proposal.begin.2}} - {{proposal.finish.2}}</div>
                         {% elif proposal.begin|length == 4 %}
-                        <div class="time-three">{{proposal.begin.0}} - {{proposal.finish.0}}</div>
-                        <div class="time-four">{{proposal.begin.1}} - {{proposal.finish.1}}</div>
-                        <div class="time-four">{{proposal.begin.2}} - {{proposal.finish.2}}</div>
+                        <div class="time">{{proposal.begin.0}} - {{proposal.finish.0}}</div>
+                        <div class="time-two">{{proposal.begin.1}} - {{proposal.finish.1}}</div>
+                        <div class="time-three">{{proposal.begin.2}} - {{proposal.finish.2}}</div>
                         <div class="time-four">{{proposal.begin.3}} - {{proposal.finish.3}}</div>
+                        {% elif proposal.begin|length >= 5 %}
+                        <div class="time">{{proposal.begin.0}} - {{proposal.finish.0}}</div>
+                        <div class="time-two">{{proposal.begin.1}} - {{proposal.finish.1}}</div>
+                        <div class="time-three">{{proposal.begin.2}} - {{proposal.finish.2}}</div>
+                        <div class="time-four">{{proposal.begin.3}} - {{proposal.finish.3}}</div>
+                        <div class="time-five">{{proposal.begin.4}} - {{proposal.finish.4}}</div>
                         {% else %}
                         <div class="no-time">{{proposal.user}} has not entered availability</div>
                         {% endif %}
@@ -75,11 +81,19 @@
 
               <div class="proposal-content-container">
                 {% if user_proposal %}
+                <form action="{% url 'update_proposal_time' activity.id %}" method="POST">
+                    {% csrf_token %}
+                    {{ proposal_update_time_form.as_p }}
+                    <input type="submit" class="create-btn" value="Add to availability"><br><br>
+                </form>
                 <form action="{% url 'update_proposal' activity.id %}" method="POST">
                     {% csrf_token %}
                     {{ proposal_update_form.as_p }}
                     <input type="submit" class="create-btn" value="Update my proposal"><br><br>
-                  </form>
+                </form>
+                <form action="{% url 'proposals_delete' activity.id %}">
+                    <input type="submit" value="Delete my proposal" class="delete-btn">
+                </form>
                   {% else %}
                 <form action="{% url 'add_proposal' activity.id %}" method="post">
                     {% csrf_token %}
