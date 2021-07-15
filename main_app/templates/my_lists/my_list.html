@@ -18,7 +18,7 @@
                             <div class="activity-content-container">
                                 <h3 class="activity-name">{{ activity.name }}</h3>
                                     <div class="activity-description-container">
-                                        <p>CATEGORY: {{ activity.category }}</p>
+                                        <p>CATEGORY: {{ activity.get_category_display }}</p>
                                         <p>DATE: {{ activity.date }}</p>
                                         <p>START: {{ activity.start }}</p>
                                         <p>STOP: {{ activity.stop }}</p>

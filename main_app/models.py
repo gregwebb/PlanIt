@@ -8,9 +8,24 @@ from django import forms
 from functools import partial
 DateInput = partial(forms.DateInput, {'class': 'datepicker'})
 
+CATEGORIES = (
+  ('MU', 'MEETUP'), 
+  ('OD', 'OUTDOORS'),
+  ('SP', 'SPORTS'),
+  ('DR', 'DRINKS'),
+  ('ML', 'MEAL'),
+  ('PR', 'PROFESSIONAL'),
+  ('OT', 'OTHER')
+)
+
+
 class Activity(models.Model):
   name = models.CharField(max_length=255)
-  category = models.CharField(max_length=100)
+  category = models.CharField(
+    max_length=2,
+    choices=CATEGORIES,
+    default=CATEGORIES[0][0]
+    )
   date = models.DateField()
   start = models.TimeField()
   stop = models.TimeField()
@@ -20,6 +35,9 @@ class Activity(models.Model):
   
   def get_absolute_url(self):
     return reverse('detail', kwargs={'activity_id': self.id})
+
+  def __str__(self):
+    return f"{self.get_category_display()}"  
 
   class Meta:
         verbose_name_plural = "activities"
