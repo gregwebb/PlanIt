@@ -50,12 +50,16 @@
                         
                         <div class="button-container">
                             <div class="edit-delete-container">
+                                {% if not attending %}
                                 <form action="{% url 'add_attendee' activity.id %}">
                                     <input type="submit" value="ATTEND THIS ACTIVITY" class="attend-btn">
                                 </form>
+                                {% endif %}
+                                {% if attending %}
                                 <form action="{% url 'remove_attendee' activity.id %}">
                                     <input type="submit" value="REMOVE FROM ATTENDEE LIST" class="attend-remove-btn">
                                 </form>
+                                {% endif %}
                             </div>
                         </div>
                         
@@ -72,7 +76,7 @@
             <div class="proposals-container">
                 {% for proposal in activity.proposal_set.all %}
                   <div class="proposal">
-                    <div class="proposal-details">{{proposal.user}}</div>
+                    <div class="proposal-details">{{proposal.user}} is interested in attending</div>
                     <div class="proposal-time">
                         Times Available:<br/>
                         {% if proposal.begin|length == 1 %}
@@ -101,7 +105,7 @@
                        
                     </div>
                     <div class="proposal-content">
-                        Comments: <br/>{{proposal.suggestion}}
+                        Additional Info: <br/>{{proposal.suggestion}}
                     </div>
                   </div>
                 {% endfor %}
@@ -122,6 +126,7 @@
                 <form action="{% url 'proposals_delete' activity.id %}">
                     <input type="submit" value="DELETE MY PROPOSAL" class="delete-btn">
                 </form>
+                <br/>
                   {% else %}
                 <form action="{% url 'add_proposal' activity.id %}" method="post">
                     {% csrf_token %}
@@ -177,7 +182,7 @@
                 <form action="{% url 'add_comment' activity.id %}" method="post">
                     {% csrf_token %}
                     {{ comment_form.as_p }}
-                    <input type="submit" class="create-btn" value="COMMENT"><br><br>
+                    <input type="submit" class="create-btn" value="ADD COMMENT"><br><br>
                   </form>
             </div>
         </div>

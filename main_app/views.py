@@ -95,6 +95,10 @@ def activities_detail(request, activity_id):
     user_proposal = Proposal.objects.filter(activity_id=activity_id).filter(user=request.user)
   else:
     user_proposal = 0
+  if request.user in activity.attendees.all():
+    attending = True
+  else: 
+    attending = False
   return render(request, 'activities/detail.html', {
     'activity': activity, 
     'proposal_form': proposal_form, 
@@ -103,6 +107,7 @@ def activities_detail(request, activity_id):
     'user_proposal': user_proposal,
     'proposal_update_form': proposal_update_form, 
     'proposal_update_time_form': proposal_update_time_form, 
+    'attending': attending
   })
 
 class ProposalCreate(LoginRequiredMixin, CreateView):
@@ -120,6 +125,7 @@ def proposals_detail(request, proposal_id):
     'proposal': proposal
   })
 
+@login_required
 def add_proposal(request, activity_id):
   form = ProposalForm(request.POST)
   if form.is_valid():
@@ -132,6 +138,7 @@ def add_proposal(request, activity_id):
     new_proposal.save()
   return redirect('detail', activity_id=activity_id)
 
+@login_required
 def update_proposal(request, activity_id):
   form = ProposalUpdateForm(request.POST)
   if form.is_valid():
@@ -143,9 +150,12 @@ def update_proposal(request, activity_id):
     loc = requests.get(f'https://maps.googleapis.com/maps/api/geocode/json?&address={update_proposal.location}&key=AIzaSyAONpZhuVUksoDe9NWHsWLk6x44XumQiOY')
     data = json.loads(loc.text)['results']
     update_proposal.location = f"{data[0]['geometry']['location']['lng']}, {data[0]['geometry']['location']['lat']}"
+    update_proposal.begin = existing_proposal.begin
+    update_proposal.finish = existing_proposal.finish
     update_proposal.save()
   return redirect('detail', activity_id=activity_id)
 
+@login_required
 def update_proposal_time(request, activity_id):
   form = ProposalUpdateTimeForm(request.POST)
   if form.is_valid():
@@ -159,10 +169,11 @@ def update_proposal_time(request, activity_id):
     existing_proposal.finish.append(update_proposal.finish[0])
     update_proposal.begin = existing_proposal.begin
     update_proposal.finish = existing_proposal.finish
+    update_proposal.suggestion = existing_proposal.suggestion
     update_proposal.save()
   return redirect('detail', activity_id=activity_id)
 
-
+@login_required
 def add_comment(request, activity_id):
   form = CommentForm(request.POST)
   if form.is_valid():
