@@ -10,11 +10,11 @@ from django.forms.widgets import TextInput
 class ActivityForm(ModelForm):
     class Meta:
         model = Activity
-        fields = ['name', 'category', 'date', 'duration', 'start', 'location', 'attendees']
+        fields = ['name', 'category', 'date', 'start', 'stop', 'location', 'attendees']
         widgets = {
             'date': forms.DateInput(format=('%m-%d-%Y'), attrs={'firstDay': 1, 'pattern=': '\d{2}-\d{2}-\d{4}', 'lang': 'pl', 'format': 'mm-dd-YYYY', 'type': 'date'},),
-            'duration': TextInput(attrs={'placeholder': '00 day 00:00:00'}),
             'start': forms.TimeInput(attrs={'type': 'time'}),
+            'stop': forms.TimeInput(attrs={'type': 'time'}),
         }
     def __init__(self, *args, **kwargs):
         super(ActivityForm, self).__init__(*args, **kwargs)
