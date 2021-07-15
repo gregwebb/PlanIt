@@ -234,6 +234,8 @@ h2 {
     border-width: 2px;
     padding: 10px;
     text-align: left;
+    background-color: #80c9fd;
+    color: black;
 }
 
 .comment-details{
@@ -258,10 +260,10 @@ h2 {
 }
 
 .proposal-details{
-    font-size: smaller;
+    font-size: 12pt;
     border-radius: 30px;
     background-color: cornflowerblue;
-    padding-left: 10px;
+    padding: 5px;
 }
 
 .proposal-content{
@@ -358,8 +360,9 @@ h2 {
 }
 
 .comment-text-box{
-    width: 85%;
+    width: 75%;
     padding: 10px;
+    border-width: 3px;
 }
 
 @media screen and (min-width: 550px){
