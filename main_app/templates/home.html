@@ -1,44 +1,70 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="home-container">
-    <div class="home-page-container">
-        <h1 class="main-welcome-title">WELCOME TO PlanIt!</h1>
-        
-        {% if user.is_authenticated %}
-            <h2 class="title">Here Are Your Activities</h2>
+    {% load static %}
+    <div class="home-container">
+        <div class="home-page-container" id="home-page-container-id">
+            <div id="main-slide">
+                
+                <div class="image-container">
+                    <div class="image-content">
+                        <img class='main-image' src="{% static 'images/first-image.jpg' %}" alt="">
+                    </div>
+                    <div class="image-content">
+                        <img class='main-image' src="{% static 'images/second-image.jpg' %}" alt="">
+                    </div>
+                    <div class="image-content">
+                        <img class='main-image' src="{% static 'images/third-image.jpg' %}" alt="">
+                    </div>
+                </div>
+                <div class="paragraph-container">
+                    <h1 class="main-welcome-title" id="home-title">WELCOME TO PlanIt!</h1>
+                    <p id="home-welcome-paragraph">
+                        "Plan, Play and be Pleased"
+                        <br>
+                        Organize your exciting
+                        <br>
+                        next event with PlanIt
+                    </p>
+    
+                </div>
+
+
+            </div>
+            {% if user.is_authenticated == False %}
+            <div class="login-signup">
+                <button class="create-btn"><a href="{% url 'login' %}"><span class="login-btn">LOG IN</span></a></button><br><br>
+                <a href="{% url 'signup' %}">Sign Up</a>
+            </div>
+            {% else %}
             <div class="new-activity-form">
                 <form action="{% url 'activities_create' %}">
                     <input type="submit" value="CREATE NEW ACTIVITY" class="create-btn">
                 </form><br>
             </div>
-            <div class="main-activity-box">
-            <div class="main-activity-list">
-                {% for activity in activities %}
-                    <div class="card-container">
-                        <a href="{% url 'detail' activity.id %}">
-                            <div class="activity-content-container">
-                                <h3 class="activity-name">{{ activity.name }}</h3>
-                                    <div class="activity-description-container">
-                                        <p>CATEGORY: {{ activity.category }}</p>
-                                        <p>DATE: {{ activity.date }}</p>
-                                        <p>START: {{ activity.start }}</p>
-                                        <p>STOP: {{ activity.stop }}</p>
-                                        <p>LOCATION: {{ activity.location }}</p>
-                                    </div>
-                            </div>
-                        </a>
-                    </div>
-                {% endfor %}
+            <div class="my-list-link">
+                <form action="{% url 'my_list' %}">
+                    <input type="submit" value="GO TO MY LISTS" class="create-btn">
+                </form><br>
             </div>
-            </div>
-        {% else %}
-            <button class="create-btn"><a href="{% url 'login' %}"><span class="login-btn">LOG IN</span></a></button><br><br>
-            <a href="{% url 'signup' %}">Sign Up</a>
-        {% endif %}
+            {% endif %}
+
+        </div>
     </div>
-    <div>
-    </div>
-</div>
+    <script>
+        $(document).ready(function() {
+            $(".image-container > div:gt(0)").hide();
+
+            setInterval(function() { 
+            $('.image-container > div:first')
+            .fadeOut(1000)
+            .next()
+            .fadeIn(1000)
+            .end()
+            .appendTo('.image-container');
+            }, 3000);
+        });
+    </script>
+
 {% endblock content %}
     

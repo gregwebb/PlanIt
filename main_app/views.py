@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.views.generic import TemplateView, ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, ModelFormMixin
 from .models import Activity, Proposal, Comment
 
@@ -70,12 +71,38 @@ class ActivityDelete(LoginRequiredMixin, DeleteView):
   model = Activity
   success_url = '/activities/'
 
+# def home(request):
+#   if request.user.is_authenticated:
+#     activities = Activity.objects.filter(user=request.user)
+#     return render(request, 'home.html', { 'activities': activities })
+#   else:
+#     return render(request, 'home.html')
+
+
+
+
+
+
+
+
 def home(request):
+    return render(request, 'home.html')
+
+
+
+
+
+
+
+
+def my_list(request):
   if request.user.is_authenticated:
     activities = Activity.objects.filter(user=request.user)
-    return render(request, 'home.html', { 'activities': activities })
+    return render(request, 'my_lists/my_list.html', { 'activities': activities })
   else:
     return render(request, 'home.html')
+
+
 
 def activities_index(request):
   activities = Activity.objects.all()
@@ -214,3 +241,13 @@ def remove_attendee(request, activity_id):
   activity.attendees.remove(request.user)
 
   return redirect('detail', activity_id=activity_id)
+
+class SearchResultsView(ListView):
+  model = Activity
+  template_name = 'search_results.html'
+  
+  def get_queryset(self):
+    query = self.request.GET.get('q')
+    object_list = Activity.objects.filter(name__icontains=query)
+    return object_list
+  
