@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css" type="text/css">
     <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Poiret+One&family=Port+Lligat+Sans&family=Rokkitt:wght@300&display=swap" rel="stylesheet">
@@ -27,25 +28,20 @@
                     <ul>
                         <li><a href="{% url 'home' %}">HOME</a></li>
                         <li><a href="{% url 'index' %}">ACTIVITIES</a></li>
+                        <li><a href="{% url 'my_list' %}">MY LISTS</a></li>
                         <li><a href="{% url 'activities_create' %}">CREATE ACTIVITY</a></li>
-                        <div class="wrap">
-                            <div class="search">
-                               <input type="text" name="q" class="searchTerm" placeholder="Find an activity...">
-                            </div>
-                         </div>
-                              </div>
-                            </form>
-                          </div>
                     </ul>
+                </div>
+                <div class="search">
+                    <input type="text" name="q" class="searchTerm" placeholder="Find an activity...">
                 </div>
                 <div class='nav-wrapper-right'>
                     <ul>
-                        
                         {% if user.is_authenticated %}
-                         <li><a href="{% url 'logout' %}">Log Out</a></li>
+                        <li><a href="{% url 'logout' %}">Log Out</a></li>
                         {% else %}   
-                         <li><a href="{% url 'login' %}">Log In</a></li>
-                         <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                        <li><a href="{% url 'login' %}">Log In</a></li>
+                        <li><a href="{% url 'signup' %}">Sign Up</a></li>
                         {% endif %}
                     </ul>
                 </div>
