@@ -10,15 +10,20 @@ from django.forms.widgets import TextInput
 class ActivityForm(ModelForm):
     class Meta:
         model = Activity
-        fields = ['name', 'category', 'date', 'start', 'stop', 'location', 'attendees']
+        fields = ['name', 'category', 'date', 'start', 'stop', 'location',]
+        labels = {
+          'name': ('Name of activity:'),
+          'category': ('Category of activity:'),
+          'date': ('Date of activity'),
+          'start': ('Starting time'),
+          'stop': ('Ending time'),
+          'location': ('Where are you thinking of having location?'),
+    }
         widgets = {
             'date': forms.DateInput(format=('%m-%d-%Y'), attrs={'firstDay': 1, 'pattern=': '\d{2}-\d{2}-\d{4}', 'lang': 'pl', 'format': 'mm-dd-YYYY', 'type': 'date'},),
             'start': forms.TimeInput(attrs={'type': 'time'}),
             'stop': forms.TimeInput(attrs={'type': 'time'}),
         }
-    def __init__(self, *args, **kwargs):
-        super(ActivityForm, self).__init__(*args, **kwargs)
-        self.fields['attendees'].required = False
 
 class ProposalForm(ModelForm):
   class Meta:
@@ -46,8 +51,8 @@ class ProposalUpdateForm(ModelForm):
       'suggestion': (''),
     }
     widgets = {
-      'suggestion': forms.Textarea(attrs={"rows":2, 'placeholder':'add any additional info here', 'style': 'border-radius: 30px', 'class': 'proposal-text-box'}),
-      'location': forms.Textarea(attrs={"rows":2,'placeholder':'add location preference here - helpful to include city ', 'style': 'border-radius: 30px', 'class': 'proposal-text-box'})
+      'suggestion': forms.Textarea(attrs={"rows":2, 'placeholder':'add any additional info here - will replace existing info', 'style': 'border-radius: 30px', 'class': 'proposal-text-box'}),
+      'location': forms.Textarea(attrs={"rows":2,'placeholder':'update location preference here - helpful to include city ', 'style': 'border-radius: 30px', 'class': 'proposal-text-box'})
     }
 
 class ProposalUpdateTimeForm(ModelForm):
