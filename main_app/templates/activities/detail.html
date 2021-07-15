@@ -7,25 +7,25 @@
     <h2 class="title">Activities</h2>
         <div class="content-container">
             <div class="card-container" id="activity-detail-container">
-        
                     <div class="activity-content-container">
-                        <h3 class="activity-name">{{ activity.name }}</h3>
+                        <br/>
+                        <div class="activity-name">{{ activity.name|title }}</div>
                         <div class="activity-description-container">
-                            <p>CATEGORY: {{ activity.get_category_display }}</p>
-                            <p>DATE: {{ activity.date }}</p>
-                            <p>START: {{ activity.start }}</p>
-                            <p>STOP: {{ activity.stop }}</p>
-                            <p>LOCATION: {{ activity.location }}</p>
+                            <p>Activity Category: {{ activity.get_category_display|title }}</p>
+                            <p>Date of Activity: {{ activity.date }}</p>
+                            <p>Start Time: {{ activity.start }}</p>
+                            <p>End Time: {{ activity.stop }}</p>
+                            <p>Location: {{ activity.location }}</p>
                             {% if activity.attendees.count %}
-                                <p>ATTENDEES:
+                                <p>Users Attending:
                                     
                                     {% for attendee in activity.attendees.all %}
-                                        <span>{{ attendee }}&emsp;</sapn>
+                                    <div class="attendee">{{ attendee }}</div>
                                     {% endfor %}
                                 </p>
                                     
                             {% else %}
-                                <p>ATTENDEES: No Attendees Yet</p>
+                                <p>Attendees: No Attendees Yet</p>
                             {% endif %}
                                 
                         </div>
