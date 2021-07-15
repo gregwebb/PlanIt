@@ -11,6 +11,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.conf import settings
 
 import requests, json
+import os 
 
 
 def signup(request):
@@ -36,6 +37,7 @@ def signup(request):
 def create_activity(request):
   form = ActivityForm(request.POST)
   if form.is_valid():
+    google_key = os.environ['GOOGLE_KEY']
     new_activity = form.save(commit=False)
     new_activity.user = request.user
     new_activity.save()
@@ -45,7 +47,7 @@ def create_activity(request):
     initial_proposal.activity = new_activity
     initial_proposal.user = request.user
     initial_proposal.suggestion = f"I would like to have activity {new_activity.name} at {new_activity.location}."
-    loc = requests.get(f'https://maps.googleapis.com/maps/api/geocode/json?&address={initial_proposal.location}&key=AIzaSyAONpZhuVUksoDe9NWHsWLk6x44XumQiOY')
+    loc = requests.get(f'https://maps.googleapis.com/maps/api/geocode/json?&address={initial_proposal.location}&key={google_key}')
     data = json.loads(loc.text)['results']
     initial_proposal.location = f"{data[0]['geometry']['location']['lng']}, {data[0]['geometry']['location']['lat']}"
     initial_proposal.save()
@@ -144,7 +146,8 @@ def activities_detail(request, activity_id):
     'user_proposal': user_proposal,
     'proposal_update_form': proposal_update_form, 
     'proposal_update_time_form': proposal_update_time_form, 
-    'attending': attending
+    'attending': attending,
+    'mapbox_key': os.environ.get('MAPBOX_KEY')
   })
 
 class ProposalCreate(LoginRequiredMixin, CreateView):
@@ -166,10 +169,11 @@ def proposals_detail(request, proposal_id):
 def add_proposal(request, activity_id):
   form = ProposalForm(request.POST)
   if form.is_valid():
+    google_key = os.environ['GOOGLE_KEY']
     new_proposal = form.save(commit=False)
     new_proposal.user = request.user
     new_proposal.activity_id = activity_id
-    loc = requests.get(f'https://maps.googleapis.com/maps/api/geocode/json?&address={new_proposal.location}&key=AIzaSyAONpZhuVUksoDe9NWHsWLk6x44XumQiOY')
+    loc = requests.get(f'https://maps.googleapis.com/maps/api/geocode/json?&address={new_proposal.location}&key={google_key}')
     data = json.loads(loc.text)['results']
     new_proposal.location = f"{data[0]['geometry']['location']['lng']}, {data[0]['geometry']['location']['lat']}"
     new_proposal.save()
@@ -179,12 +183,13 @@ def add_proposal(request, activity_id):
 def update_proposal(request, activity_id):
   form = ProposalUpdateForm(request.POST)
   if form.is_valid():
+    google_key = os.environ['GOOGLE_KEY']
     update_proposal = form.save(commit=False)
     existing_proposal = Proposal.objects.filter(activity_id=activity_id).filter(user=request.user).first()
     update_proposal.id = existing_proposal.id
     update_proposal.activity_id = activity_id
     update_proposal.user = request.user
-    loc = requests.get(f'https://maps.googleapis.com/maps/api/geocode/json?&address={update_proposal.location}&key=AIzaSyAONpZhuVUksoDe9NWHsWLk6x44XumQiOY')
+    loc = requests.get(f'https://maps.googleapis.com/maps/api/geocode/json?&address={update_proposal.location}&key={google_key}')
     data = json.loads(loc.text)['results']
     update_proposal.location = f"{data[0]['geometry']['location']['lng']}, {data[0]['geometry']['location']['lat']}"
     update_proposal.begin = existing_proposal.begin
