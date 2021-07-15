@@ -16,7 +16,18 @@
                         <p>DURATION: {{ activity.duration }}</p>
                         <p>START: {{ activity.start }}</p>
                         <p>LOCATION: {{ activity.location }}</p>
-                        <p>ATTENDEES: {{ activity.attendees }}</p><br>
+                        {% if activity.attendees.count %}
+                            <p>ATTENDEES:
+                                
+                                {% for attendee in activity.attendees.all %}
+                                    <span>{{ attendee }}&emsp;</sapn>
+                                {% endfor %}
+                            </p>
+                                
+                        {% else %}
+                            <p>ATTENDEES: No Attendee Yet</p>
+                        {% endif %}
+                            
                     </div>
                     {% if user == activity.user %}
                     <div class="button-container">
@@ -31,6 +42,23 @@
                         </div>
 
                     </div>
+                    {% endif %}
+                        <br>
+
+
+                    {% if user != activity.user %}
+                        
+                        <div class="button-container">
+                            <div class="edit-delete-container">
+                                <form action="{% url 'add_attendee' activity.id %}">
+                                    <input type="submit" value="ATTEND THIS ACTIVITY" class="attend-btn">
+                                </form>
+                                <form action="{% url 'remove_attendee' activity.id %}">
+                                    <input type="submit" value="REMOVE FROM ATTENDEE LIST" class="attend-remove-btn">
+                                </form>
+                            </div>
+                        </div>
+                        
                     {% endif %}
                         
     

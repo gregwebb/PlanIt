@@ -149,3 +149,19 @@ def add_comment(request, activity_id):
     new_comment.activity_id = activity_id
     new_comment.save()
   return redirect('detail', activity_id=activity_id)
+
+@login_required
+def add_attendee(request, activity_id):
+  activity = Activity.objects.get(id=activity_id)
+  if activity.attendees.all().filter(username=request.user) != True:
+    activity.attendees.add(request.user)
+  else:
+    pass
+  return redirect('detail', activity_id=activity_id)
+
+@login_required
+def remove_attendee(request, activity_id):
+  activity = Activity.objects.get(id=activity_id)
+  activity.attendees.remove(request.user)
+
+  return redirect('detail', activity_id=activity_id)
