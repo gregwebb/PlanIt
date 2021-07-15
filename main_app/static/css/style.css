@@ -391,3 +391,30 @@ h2 {
     }
 }
 
+@media screen and (min-width: 768px) {
+    .content-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+        grid-template-areas:
+            "activity-detail proposal-detail"
+            "map-comment map-comment";
+        justify-items: stretch;
+        align-items: stretch;
+        justify-content: center;
+        align-content: start;
+    }
+
+    #activity-detail-container {
+        grid-area: activity-detail;
+    }
+
+    #proposal-detail-container {
+        grid-area: proposal-detail;
+    }
+
+    .map-comment-container {
+        grid-area: map-comment;
+    }
+}
+
