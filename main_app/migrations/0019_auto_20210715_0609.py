@@ -2,6 +2,8 @@
 
 from django.db import migrations, models
 
+import datetime
+
 
 class Migration(migrations.Migration):
 
@@ -17,7 +19,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='activity',
             name='stop',
-            field=models.TimeField(default=1),
+            field=models.TimeField(default=datetime.time()),
             preserve_default=False,
         ),
     ]
