@@ -13,8 +13,8 @@
                     <div class="activity-description-container">
                         <p>CATEGORY: {{ activity.category }}</p>
                         <p>DATE: {{ activity.date }}</p>
-                        <p>DURATION: {{ activity.duration }}</p>
                         <p>START: {{ activity.start }}</p>
+                        <p>STOP: {{ activity.stop }}</p>
                         <p>LOCATION: {{ activity.location }}</p>
                         {% if activity.attendees.count %}
                             <p>ATTENDEES:
@@ -25,7 +25,7 @@
                             </p>
                                 
                         {% else %}
-                            <p>ATTENDEES: No Attendee Yet</p>
+                            <p>ATTENDEES: No Attendees Yet</p>
                         {% endif %}
                             
                     </div>
@@ -116,22 +116,22 @@
                 <form action="{% url 'update_proposal_time' activity.id %}" method="POST">
                     {% csrf_token %}
                     {{ proposal_update_time_form.as_p }}
-                    <input type="submit" class="create-btn" value="Add to availability"><br><br>
+                    <input type="submit" class="create-btn" value="ADD TO AVAILABILITY"><br><br>
                 </form>
                 <form action="{% url 'update_proposal' activity.id %}" method="POST">
                     {% csrf_token %}
                     {{ proposal_update_form.as_p }}
-                    <input type="submit" class="edit-btn" value="Update my proposal"><br><br>
+                    <input type="submit" class="create-btn" value="UPDATE MY PROPOSAL"><br><br>
                 </form>
                 <form action="{% url 'proposals_delete' activity.id %}">
-                    <input type="submit" value="Delete my proposal" class="delete-btn">
+                    <input type="submit" value="DELETE MY PROPOSAL" class="delete-btn">
                 </form>
                 <br/>
                   {% else %}
                 <form action="{% url 'add_proposal' activity.id %}" method="post">
                     {% csrf_token %}
                     {{ proposal_form.as_p }}
-                    <input type="submit" class="create-btn" value="I would like to attend!"><br><br>
+                    <input type="submit" class="create-btn" value="I WOULD LIKE TO ATTEND!"><br><br>
                   </form>
                 {% endif %}
             </div>
@@ -182,7 +182,7 @@
                 <form action="{% url 'add_comment' activity.id %}" method="post">
                     {% csrf_token %}
                     {{ comment_form.as_p }}
-                    <input type="submit" class="create-btn" value="Add Comment"><br><br>
+                    <input type="submit" class="create-btn" value="ADD COMMENT"><br><br>
                   </form>
             </div>
         </div>
