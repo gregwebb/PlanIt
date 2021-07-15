@@ -141,7 +141,7 @@
         <div class="card-container">
             <div id='map'>
                 <script>
-                mapboxgl.accessToken = 'pk.eyJ1IjoiZ3JlZ3dlYmIiLCJhIjoiY2tyMzExajNyMjk3cDJ1cnpzc2NtZ3djYyJ9._v1_Nt8M_bbJrkC1yB7qeQ';
+                mapboxgl.accessToken = '{{mapbox_key}}';
                 let map = new mapboxgl.Map({
                     container: 'map',
                     style: 'mapbox://styles/mapbox/streets-v11',
@@ -150,7 +150,7 @@
                 });
                 map.addControl(
                     new MapboxGeocoder({
-                        accessToken: 'pk.eyJ1IjoiZ3JlZ3dlYmIiLCJhIjoiY2tyMzExajNyMjk3cDJ1cnpzc2NtZ3djYyJ9._v1_Nt8M_bbJrkC1yB7qeQ',
+                        accessToken: '{{mapbox_key}}',
                         mapboxgl: mapboxgl
                     })
                     );
