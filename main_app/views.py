@@ -38,8 +38,19 @@ def create_activity(request):
   if form.is_valid():
     new_activity = form.save(commit=False)
     new_activity.user = request.user
-    form.save()
-    return redirect('index')
+    new_activity.save()
+    new_activity.attendees.add(request.user)
+    initial_proposal = Proposal()
+    initial_proposal.location = new_activity.location
+    initial_proposal.activity = new_activity
+    initial_proposal.user = request.user
+    initial_proposal.suggestion = f"I would like to have activity {new_activity.name} at {new_activity.location}."
+    loc = requests.get(f'https://maps.googleapis.com/maps/api/geocode/json?&address={initial_proposal.location}&key=AIzaSyAONpZhuVUksoDe9NWHsWLk6x44XumQiOY')
+    data = json.loads(loc.text)['results']
+    initial_proposal.location = f"{data[0]['geometry']['location']['lng']}, {data[0]['geometry']['location']['lat']}"
+    initial_proposal.save()
+    return redirect('detail', activity_id=new_activity.id)
+    
 
   return render(request, 'main_app/activity_form.html', {
     'form': form
