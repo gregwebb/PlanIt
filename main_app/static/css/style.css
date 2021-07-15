@@ -251,6 +251,7 @@ h2 {
 
 .proposal-content{
     padding-left:15px;
+    padding: 10px;
     margin-top: 5px;
     border-radius: 30px;
     background-color: white;
@@ -259,10 +260,61 @@ h2 {
 
 .proposal-time{
     padding-left:15px;
+    padding: 10px;
     margin-top: 5px;
     border-radius: 30px;
     background-color: white;
     color: black;
+}
+
+.no-time{
+    display: inline-flex;
+    background-color:plum;
+    border-radius: 30px;
+    font-size: x-small;
+    padding: 10px;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+.time{
+    display: inline-flex;
+    background-color: rgb(84, 157, 240);
+    border-radius: 30px;
+    font-size: x-small;
+    padding: 10px;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+.time-two{
+    display: inline-flex;
+    background-color: forestgreen;
+    border-radius: 30px;
+    font-size: x-small;
+    padding: 10px;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+.time-three{
+    display: inline-flex;
+    background-color: palegreen;
+    border-radius: 30px;
+    font-size: x-small;
+    padding: 10px;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+.time-four{
+    display: inline-flex;
+    background-color: slateblue;
+    border-radius: 30px;
+    font-size: x-small;
+    padding: 10px;
+    margin-top: 5px;
+    font-weight: bold;
 }
 
 .proposal-content-container{
