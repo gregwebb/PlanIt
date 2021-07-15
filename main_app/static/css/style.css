@@ -83,26 +83,67 @@ main {
     border-radius: 30px;
     margin-top: 20px;
     background-color: #1d1d1d99;
-    padding-top: 20vh;
+    padding-top: 2vh;
     padding-bottom: 20vh;
     padding-right: auto;
     padding-left: auto;
-    -webkit-animation: slide .5s forwards;
-    -webkit-animation-delay: 2s;
-    animation: slide 1.0s forwards;
+    -webkit-animation: slide 0.15s forwards;
+    -webkit-animation-delay: 0s;
+    animation: slide 0.15s forwards;
     animation-delay: 0s;
 }
-.main-welcome-title {
-    margin-top: -150px;
+
+#home-page-container-id {
+    padding: 0;
 }
+#main-slide {
+    position: relative;
+}
+.paragraph-container{
+    position: absolute;
+    margin-left: 50%;
+    transform:translateX(-50%);
+    margin-right: auto;
+}
+#home-title {
+    margin-top: -230px;
+    font-size: 20px;
+    text-shadow: 0 0 30px rgba(0,0,0,1);
+}
+#home-welcome-paragraph {
+    text-shadow: 0 0 30px rgba(0,0,0,1);
+}
+.main-image {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 30px;
+}
+.image-container {
+    border-radius: 30px;
+    margin: 10px auto;
+    position: relative;
+    width: 95%;
+    height: 280px;
+    box-shadow: 0 0 20px rgba(0,0,0,.7);
+}
+
+.image-container > div {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+
 .main-activity-list {
     margin: auto;
-    height: 600px;
-    width: 700px;
+    height: 80vh;
+    width: auto;
     overflow-y: auto;
     position: relative;
     border: inset grey;
-    border-width: 2px;
+    border-width: 1px;
 }
 .main-activity-list::-webkit-scrollbar {
     display: none;
@@ -143,7 +184,9 @@ footer {
     display: flex;
     flex-direction: row;
 }
-
+.login-signup {
+    margin-bottom: 30px;
+}
 .create-btn, .log-in-btn {
     background-image: linear-gradient(120deg, #ddf7ff 0%, #86cfff 100%);
     box-shadow: 2px 4px 25px rgba(0,0,0,.1);
@@ -389,9 +432,16 @@ h2 {
     nav li {
         padding-right: 15px;
     }
+    .image-container {
+        height: 300px;
+    }
 }
 
 @media screen and (min-width: 768px) {
+    #logo {
+        font-size: 70px;
+        margin: 25px 0;
+    }
     .content-container {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -416,5 +466,44 @@ h2 {
     .map-comment-container {
         grid-area: map-comment;
     }
+    .image-container {
+        height: 400px;
+    }
+    #home-title {
+        margin-top: -280px;
+        font-size: 45px;
+    }
+    #home-welcome-paragraph {
+        font-size: 25px;
+    }
 }
 
+@media screen and (min-width: 1024px) {
+    #logo {
+        font-size: 80px;
+        margin: 25px 0;
+    }
+    .image-container {
+        height: 500px;
+    }
+    #home-title {
+        margin-top: -330px;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    #logo {
+        font-size: 90px;
+        margin: 25px 0;
+    }
+    .image-container: {
+        height: 600px;
+    }
+    #home-title {
+        margin-top: -350px;
+        font-size: 50px;
+    }
+    #home-welcome-paragraph {
+        font-size: 30px;
+    }
+}

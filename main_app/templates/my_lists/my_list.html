@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="home-container">
+    <div class="home-page-container">
+        {% if user.is_authenticated %}
+            <h2 class="title">Here Are Your Activities</h2>
+            <div class="new-activity-form">
+                <form action="{% url 'activities_create' %}">
+                    <input type="submit" value="CREATE NEW ACTIVITY" class="create-btn">
+                </form><br>
+            </div>
+            <div class="main-activity-box">
+            <div class="main-activity-list">
+                {% for activity in activities %}
+                    <div class="card-container">
+                        <a href="{% url 'detail' activity.id %}">
+                            <div class="activity-content-container">
+                                <h3 class="activity-name">{{ activity.name }}</h3>
+                                    <div class="activity-description-container">
+                                        <p>CATEGORY: {{ activity.category }}</p>
+                                        <p>DATE: {{ activity.date }}</p>
+                                        <p>START: {{ activity.start }}</p>
+                                        <p>STOP: {{ activity.stop }}</p>
+                                        <p>LOCATION: {{ activity.location }}</p>
+                                    </div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+            </div>
+        {% else %}
+            <button class="create-btn"><a href="{% url 'login' %}"><span class="login-btn">LOG IN</span></a></button><br><br>
+            <a href="{% url 'signup' %}">Sign Up</a>
+        {% endif %}
+    </div>
+    <div>
+    </div>
+</div>
+{% endblock content %}
+    
