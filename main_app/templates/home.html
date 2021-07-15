@@ -22,8 +22,8 @@
                                     <div class="activity-description-container">
                                         <p>CATEGORY: {{ activity.category }}</p>
                                         <p>DATE: {{ activity.date }}</p>
-                                        <p>DURATION: {{ activity.duration }}</p>
                                         <p>START: {{ activity.start }}</p>
+                                        <p>STOP: {{ activity.stop }}</p>
                                         <p>LOCATION: {{ activity.location }}</p>
                                     </div>
                             </div>
@@ -36,6 +36,8 @@
             <button class="create-btn"><a href="{% url 'login' %}"><span class="login-btn">LOG IN</span></a></button><br><br>
             <a href="{% url 'signup' %}">Sign Up</a>
         {% endif %}
+    </div>
+    <div>
     </div>
 </div>
 {% endblock content %}
