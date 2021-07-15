@@ -18,4 +18,5 @@ urlpatterns = [
     path('activities/<int:activity_id>/add_comment/', views.add_comment, name='add_comment'),
     path('activities/<int:activity_id>/add_attendee/', views.add_attendee, name='add_attendee'),
     path('activities/<int:activity_id>/remove_attendee/', views.remove_attendee, name='remove_attendee'),
+    path('home-new/', views.home_new, name="home_new"),
 ]

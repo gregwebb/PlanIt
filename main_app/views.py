@@ -64,6 +64,24 @@ def home(request):
   else:
     return render(request, 'home.html')
 
+
+
+
+
+
+
+
+def home_new(request):
+    return render(request, 'home-new.html')
+
+
+
+
+
+
+
+
+
 def activities_index(request):
   activities = Activity.objects.all()
   return render(request, 'activities/index.html', { 'activities': activities })
