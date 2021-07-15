@@ -2,14 +2,30 @@
 
 {% block content %}
 
-<h1>Search Results</h1>
-
-<ul>
-  {% for activity in object_list %}
-    <li>
-      {{ activity.name }}, {{ activity.date }}
-    </li>
-  {% endfor %}
-</ul>
+<div class="main-container">
+    <h2 class="title">Search Results</h2>
+    
+    {% for activity in object_list %}
+        <div class="card-container">
+            <a href="{% url 'detail' activity.id %}">
+                <div class="activity-content-container">
+                    <h3 class="activity-name">{{ activity.name }} with ({{ activity.user }})</h3>
+                    <div class="activity-description-container">
+                        <p>CATEGORY: {{ activity.category }}</p>
+                        <p>DATE: {{ activity.date }}</p>
+                        <p>START: {{ activity.start }}</p>
+                        <p>STOP: {{ activity.stop }}</p>
+                        <p>LOCATION: {{ activity.location }}</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    {% endfor %}
+    <div class="new-activity-form">
+        <form action="{% url 'activities_create' %}">
+            <input type="submit" value="Don't see what's your looking for? PlanIt!" class="create-btn">
+        </form>
+    </div>
+</div>
 
 {% endblock content %}
