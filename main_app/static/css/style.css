@@ -332,6 +332,16 @@ h2 {
     font-weight: bold;
 }
 
+.time-five{
+    display: inline-flex;
+    background-color: hotpink;
+    border-radius: 30px;
+    font-size: x-small;
+    padding: 10px;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
 .proposal-content-container{
     width: 85%;
     border-radius: 30px;

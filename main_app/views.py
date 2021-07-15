@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, ModelFormMixin
 from .models import Activity, Proposal, Comment
 
-from .forms import ActivityForm, ProposalForm, CommentForm, ProposalUpdateForm
+from .forms import ActivityForm, ProposalForm, CommentForm, ProposalUpdateForm, ProposalUpdateTimeForm
 
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
@@ -10,10 +10,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.conf import settings
 
-
 import requests, json
 
-GOOG_KEY = getattr(settings, "GOOG_KEY", None)
 
 def signup(request):
   error_message = ''
@@ -74,6 +72,7 @@ def activities_detail(request, activity_id):
   activity = Activity.objects.get(id=activity_id)
   proposal_form = ProposalForm()
   proposal_update_form = ProposalUpdateForm()
+  proposal_update_time_form = ProposalUpdateTimeForm()
   comment_form = CommentForm()
   proposals = Proposal.objects.filter(activity_id=activity_id)
   coors = []
@@ -103,11 +102,17 @@ def activities_detail(request, activity_id):
     'comment_form': comment_form, 
     'user_proposal': user_proposal,
     'proposal_update_form': proposal_update_form, 
+    'proposal_update_time_form': proposal_update_time_form, 
   })
 
 class ProposalCreate(LoginRequiredMixin, CreateView):
   model = Proposal
   fields = ['activity', 'user', 'suggestion', 'location']
+
+def delete_proposal(request, activity_id):
+    delete_proposal = Proposal.objects.filter(activity_id=activity_id).filter(user=request.user).first()
+    delete_proposal.delete()
+    return redirect('detail', activity_id=activity_id)
   
 def proposals_detail(request, proposal_id):
   proposal = Proposal.objects.get(id=proposal_id)
@@ -140,6 +145,23 @@ def update_proposal(request, activity_id):
     update_proposal.location = f"{data[0]['geometry']['location']['lng']}, {data[0]['geometry']['location']['lat']}"
     update_proposal.save()
   return redirect('detail', activity_id=activity_id)
+
+def update_proposal_time(request, activity_id):
+  form = ProposalUpdateTimeForm(request.POST)
+  if form.is_valid():
+    update_proposal = form.save(commit=False)
+    existing_proposal = Proposal.objects.filter(activity_id=activity_id).filter(user=request.user).first()
+    update_proposal.id = existing_proposal.id
+    update_proposal.activity_id = activity_id
+    update_proposal.user = request.user
+    update_proposal.location = existing_proposal.location
+    existing_proposal.begin.append(update_proposal.begin[0])
+    existing_proposal.finish.append(update_proposal.finish[0])
+    update_proposal.begin = existing_proposal.begin
+    update_proposal.finish = existing_proposal.finish
+    update_proposal.save()
+  return redirect('detail', activity_id=activity_id)
+
 
 def add_comment(request, activity_id):
   form = CommentForm(request.POST)

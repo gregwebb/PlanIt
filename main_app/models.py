@@ -3,6 +3,10 @@ from django.urls import reverse
 from django.contrib.postgres.fields import ArrayField, DateTimeRangeField
 from django.contrib.auth.models import User
 from django.conf import settings
+from django import forms
+
+from functools import partial
+DateInput = partial(forms.DateInput, {'class': 'datepicker'})
 
 class Activity(models.Model):
   name = models.CharField(max_length=255)

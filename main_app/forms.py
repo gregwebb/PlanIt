@@ -6,6 +6,7 @@ from .models import Proposal, Activity, Comment
 
 from django.forms.widgets import TextInput
 
+
 class ActivityForm(ModelForm):
     class Meta:
         model = Activity
@@ -22,12 +23,16 @@ class ActivityForm(ModelForm):
 class ProposalForm(ModelForm):
   class Meta:
     model = Proposal
-    fields = ['location', 'suggestion']
+    fields = ['begin', 'finish', 'location', 'suggestion']
     labels = {
+      'begin': ('Start Time:'),
+      'finish': ('End Time:'),
       'location': (''),
       'suggestion': (''),
     }
     widgets = {
+      'begin': forms.DateTimeInput(attrs={'type': 'datetime-local','class': 'form-control'},format='%Y-%m-%dT%H:%M'),
+      'finish': forms.DateTimeInput(attrs={'type': 'datetime-local','class': 'form-control'},format='%Y-%m-%dT%H:%M'),
       'suggestion': forms.Textarea(attrs={"rows":2, 'placeholder':'add any additional info here', 'style': 'border-radius: 30px', 'class': 'proposal-text-box'}),
       'location': forms.Textarea(attrs={"rows":2,'placeholder':'add location preference here - helpful to include city ', 'style': 'border-radius: 30px', 'class': 'proposal-text-box'})
     }
@@ -43,6 +48,19 @@ class ProposalUpdateForm(ModelForm):
     widgets = {
       'suggestion': forms.Textarea(attrs={"rows":2, 'placeholder':'add any additional info here', 'style': 'border-radius: 30px', 'class': 'proposal-text-box'}),
       'location': forms.Textarea(attrs={"rows":2,'placeholder':'add location preference here - helpful to include city ', 'style': 'border-radius: 30px', 'class': 'proposal-text-box'})
+    }
+
+class ProposalUpdateTimeForm(ModelForm):
+  class Meta:
+    model = Proposal
+    fields = ['begin', 'finish']
+    labels = {
+      'begin': ('Start Time:'),
+      'finish': ('End Time:')
+    }
+    widgets = {
+      'begin': forms.DateTimeInput(attrs={'type': 'datetime-local','class': 'form-control'},format='%Y-%m-%dT%H:%M'),
+      'finish': forms.DateTimeInput(attrs={'type': 'datetime-local','class': 'form-control'},format='%Y-%m-%dT%H:%M')
     }
 
 class CommentForm(ModelForm):
