@@ -47,12 +47,12 @@ def create_activity(request):
     'form': form
   })
 
-class ActivityUpdate(LoginRequiredMixin, UpdateView, ModelFormMixin):
+
+class ActivityUpdate(LoginRequiredMixin, UpdateView):
   model = Activity
   form_class = ActivityForm
-  def post(self, request, pk):
-    request.POST = request.POST.copy()
-    return super(ActivityUpdate, self).post(request, pk)
+  def form_valid(self, form):
+    return super().form_valid(form)
 
 
 class ActivityDelete(LoginRequiredMixin, DeleteView):

@@ -10,7 +10,7 @@ class ActivityForm(ModelForm):
         model = Activity
         fields = ['name', 'category', 'date', 'duration', 'start', 'location', 'attendees']
         widgets = {
-            'date': forms.DateInput(format=('%d-%m-%Y'), attrs={'firstDay': 1, 'pattern=': '\d{4}-\d{2}-\d{2}', 'lang': 'pl', 'format': 'yyyy-mm-dd', 'type': 'date'}),
+            'date': forms.DateInput(format=('%m-%d-%Y'), attrs={'firstDay': 1, 'pattern=': '\d{2}-\d{2}-\d{4}', 'lang': 'pl', 'format': 'mm-dd-YYYY', 'type': 'date'},),
             'duration': TextInput(attrs={'placeholder': '00 day 00:00:00'}),
             'start': forms.TimeInput(attrs={'type': 'time'}),
             'attendees': forms.HiddenInput(),
