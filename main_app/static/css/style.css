@@ -391,6 +391,23 @@ h2 {
     }
 }
 
+.search {
+    width: 250px;
+    margin: auto;
+    display: flex;
+  }
+  
+  .searchTerm {
+    width: 100%;
+    border: 3px solid #00B4CC;
+    padding: 5px;
+    padding-left: 10px;
+    height: 20px;
+    border-radius: 30px;
+    color: #9DBFAF;
+  }
+
+
 @media screen and (min-width: 768px) {
     .content-container {
         display: grid;

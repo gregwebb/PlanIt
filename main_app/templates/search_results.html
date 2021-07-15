@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Search Results</h1>
+
+<ul>
+  {% for activity in object_list %}
+    <li>
+      {{ activity.name }}, {{ activity.date }}
+    </li>
+  {% endfor %}
+</ul>
+
+{% endblock content %}
