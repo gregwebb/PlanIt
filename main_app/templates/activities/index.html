@@ -2,34 +2,33 @@
 
 {% block content %}
 
-<div class="main-container">
-    <h2 class="title">Activities</h2>
-    
-    {% for activity in activities %}
-        <div class="card-container">
-            <a href="{% url 'detail' activity.id %}">
-                <div class="activity-content-container">
-                    <h3 class="activity-name">{{ activity.name }} with ({{ activity.user }})</h3>
-                    <div class="activity-description-container">
-                        <p>Activity Category: {{ activity.get_category_display|title }}</p>
-                        <p>Date of Activity: {{ activity.date }}</p>
-                        <p>Start Time: {{ activity.start }}</p>
-                        <p>End Time: {{ activity.stop }}</p>
-                        <p>Location: {{ activity.location }}</p>
+    <div class="main-container">
+        <h2 class="title">Activities</h2>
+        
+        {% for activity in activities %}
+            <div class="card-container">
+                <a href="{% url 'detail' activity.id %}">
+                    <div class="activity-content-container">
+                        <h3 class="activity-name">{{ activity.name }} with ({{ activity.user }})</h3>
+                        <div class="activity-description-container">
+                            <p>Activity Category: {{ activity.get_category_display|title }}</p>
+                            <p>Date of Activity: {{ activity.date }}</p>
+                            <p>Start Time: {{ activity.start }}</p>
+                            <p>End Time: {{ activity.stop }}</p>
+                            <p>Location: {{ activity.location }}</p>
+                        </div>
                     </div>
-                </div>
-            </a>
+                </a>
+            </div>
+        {% endfor %}
+
+        <div class="new-activity-form">
+            <form action="{% url 'activities_create' %}">
+                <input type="submit" value="CREATE NEW ACTIVITY" class="create-btn">
+            </form>
         </div>
-    {% endfor %}
-    <div class="new-activity-form">
-        <form action="{% url 'activities_create' %}">
-            <input type="submit" value="CREATE NEW ACTIVITY" class="create-btn">
-        </form>
 
     </div>
-
-</div>
-
 
 {% endblock content %}
     

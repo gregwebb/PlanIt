@@ -2,35 +2,38 @@
 
 {% block content %}
 
-<div class="main-container"> 
-    
-    <h2 class="title">Activities</h2>
+    <div class="main-container"> 
+        
+        <h2 class="title">Activities</h2>
+
         <div class="content-container">
+
             <div class="card-container" id="activity-detail-container">
-                    <div class="activity-content-container">
-                        <br/>
-                        <div class="activity-name">{{ activity.name|title }}</div>
-                        <div class="activity-description-container">
-                            <p>Activity Category: {{ activity.get_category_display|title }}</p>
-                            <p>Date of Activity: {{ activity.date }}</p>
-                            <p>Start Time: {{ activity.start }}</p>
-                            <p>End Time: {{ activity.stop }}</p>
-                            <p>Location: {{ activity.location }}</p>
-                            {% if activity.attendees.count %}
-                                <p>Users Attending:
-                                    
-                                    {% for attendee in activity.attendees.all %}
-                                    <div class="attendee">{{ attendee }}</div>
-                                    <br/>
-                                    {% endfor %}
-                                </p>
-                                    
-                            {% else %}
-                                <p>Attendees: No Attendees Yet</p>
-                            {% endif %}
+                <div class="activity-content-container">
+                    <br/>
+                    <div class="activity-name">{{ activity.name|title }}</div>
+                    <div class="activity-description-container">
+                        <p>Activity Category: {{ activity.get_category_display|title }}</p>
+                        <p>Date of Activity: {{ activity.date }}</p>
+                        <p>Start Time: {{ activity.start }}</p>
+                        <p>End Time: {{ activity.stop }}</p>
+                        <p>Location: {{ activity.location }}</p>
+
+                        {% if activity.attendees.count %}
+                            <p>Users Attending:
                                 
-                        </div>
-                        {% if user == activity.user %}
+                                {% for attendee in activity.attendees.all %}
+                                <div class="attendee">{{ attendee }}</div>
+                                <br/>
+                                {% endfor %}
+                            </p>
+                        {% else %}
+                            <p>Attendees: No Attendees Yet</p>
+                        {% endif %}
+                            
+                    </div>
+
+                    {% if user == activity.user %}
                         <div class="button-container">
                             <div class="edit-delete-container">
                                 <form action="{% url 'activities_update' activity.id %}">
@@ -39,80 +42,60 @@
                                 <form action="{% url 'activities_delete' activity.id %}">
                                     <input type="submit" value="DELETE" class="delete-btn">
                                 </form>
-        
                             </div>
-    
                         </div>
-                        {% endif %}
-                            <br>
-    
-    
-                        {% if user != activity.user %}
-                            
-                            <div class="button-container">
-                                <div class="edit-delete-container">
-                                    {% if not attending %}
-                                    <form action="{% url 'add_attendee' activity.id %}">
-                                        <input type="submit" value="ATTEND THIS ACTIVITY" class="attend-btn">
-                                    </form>
-                                    {% endif %}
-                                    {% if attending %}
-                                    <form action="{% url 'remove_attendee' activity.id %}">
-                                        <input type="submit" value="REMOVE FROM ATTENDEE LIST" class="attend-remove-btn">
-                                    </form>
-                                    {% endif %}
-                                </div>
+                    {% endif %}
+
+                    <br>
+
+                    {% if user != activity.user %}
+                        <div class="button-container">
+                            <div class="edit-delete-container">
+                                {% if not attending %}
+                                <form action="{% url 'add_attendee' activity.id %}">
+                                    <input type="submit" value="ATTEND THIS ACTIVITY" class="attend-btn">
+                                </form>
+                                {% endif %}
+                                {% if attending %}
+                                <form action="{% url 'remove_attendee' activity.id %}">
+                                    <input type="submit" value="REMOVE FROM ATTENDEE LIST" class="attend-remove-btn">
+                                </form>
+                                {% endif %}
                             </div>
-                            
-                        {% endif %}
-                            
-        
-                    </div>
-    
-                    
-        
+                        </div>
+                    {% endif %}
+
+                </div>
             </div>
-    
+
             <div class="card-container" id="proposal-detail-container">
                 <div class="proposals-container">
+
                     {% for proposal in activity.proposal_set.all %}
-                      <div class="proposal">
-                        <div class="proposal-details">{{proposal.user}} is interested in attending</div>
-                        <div class="proposal-time">
-                            Times Available:<br/>
-                            {% if proposal.begin|length == 1 %}
-                            <div class="time">{{proposal.begin.0}} - {{proposal.finish.0}}</div>
-                            {% elif proposal.begin|length == 2 %}
-                            <div class="time">{{proposal.begin.0}} - {{proposal.finish.0}}</div>
-                            <div class="time-two">{{proposal.begin.1}} - {{proposal.finish.1}}</div>
-                            {% elif proposal.begin|length == 3 %}
-                            <div class="time">{{proposal.begin.0}} - {{proposal.finish.0}}</div>
-                            <div class="time-two">{{proposal.begin.1}} - {{proposal.finish.1}}</div>
-                            <div class="time-three">{{proposal.begin.2}} - {{proposal.finish.2}}</div>
-                            {% elif proposal.begin|length == 4 %}
-                            <div class="time">{{proposal.begin.0}} - {{proposal.finish.0}}</div>
-                            <div class="time-two">{{proposal.begin.1}} - {{proposal.finish.1}}</div>
-                            <div class="time-three">{{proposal.begin.2}} - {{proposal.finish.2}}</div>
-                            <div class="time-four">{{proposal.begin.3}} - {{proposal.finish.3}}</div>
-                            {% elif proposal.begin|length >= 5 %}
-                            <div class="time">{{proposal.begin.0}} - {{proposal.finish.0}}</div>
-                            <div class="time-two">{{proposal.begin.1}} - {{proposal.finish.1}}</div>
-                            <div class="time-three">{{proposal.begin.2}} - {{proposal.finish.2}}</div>
-                            <div class="time-four">{{proposal.begin.3}} - {{proposal.finish.3}}</div>
-                            <div class="time-five">{{proposal.begin.4}} - {{proposal.finish.4}}</div>
-                            {% else %}
-                            <div class="no-time">{{proposal.user}} has not entered availability</div>
-                            {% endif %}
-                           
+                        <div class="proposal">
+                            <div class="proposal-details">{{proposal.user}} is interested in attending</div>
+                            <div class="proposal-time">
+                                Times Available:
+                                <br/>
+
+                                
+                                {% for proposal_begin, proposal_finish in proposal_time %}
+                                    <div class="time">{{proposal_begin}} - {{proposal_finish}}</div>
+                                {% endfor %}
+                                    
+
+                            
+                            </div>
+                            <div class="proposal-content">
+                                Additional Info: <br/>{{proposal.suggestion}}
+                            </div>
                         </div>
-                        <div class="proposal-content">
-                            Additional Info: <br/>{{proposal.suggestion}}
-                        </div>
-                      </div>
                     {% endfor %}
-              </div>
-    
-                  <div class="proposal-content-container">
+
+                </div>
+
+                <div class="proposal-content-container">
+
                     {% if user_proposal %}
                     <form action="{% url 'update_proposal_time' activity.id %}" method="POST">
                         {% csrf_token %}
@@ -128,71 +111,77 @@
                         <input type="submit" value="DELETE MY PROPOSAL" class="delete-btn">
                     </form>
                     <br/>
-                      {% else %}
+                        {% else %}
                     <form action="{% url 'add_proposal' activity.id %}" method="post">
                         {% csrf_token %}
                         {{ proposal_form.as_p }}
                         <input type="submit" class="create-btn" value="I WOULD LIKE TO ATTEND!"><br><br>
-                      </form>
+                        </form>
                     {% endif %}
+
                 </div>
                 <br/>
-        </div>
-    <div class="map-comment-container">
-        <div class="card-container">
-            <div id='map'>
-                <script>
-                mapboxgl.accessToken = '{{mapbox_key}}';
-                let map = new mapboxgl.Map({
-                    container: 'map',
-                    style: 'mapbox://styles/mapbox/streets-v11',
-                    center: [{{ center }}],
-                    zoom: 11
-                });
-                map.addControl(
-                    new MapboxGeocoder({
-                        accessToken: '{{mapbox_key}}',
-                        mapboxgl: mapboxgl
-                    })
-                    );
-                map.addControl(
-                    new mapboxgl.
-                    NavigationControl());
-                let marker = "";
-                {% for proposal in activity.proposal_set.all %}
-                marker = new mapboxgl.Marker()
-                .setLngLat([{{ proposal.location }}])
-                .setPopup(new mapboxgl.Popup()
-                .setHTML("<h2 class='proposal-suggestion'>{{ proposal.suggestion }} <br/><br/>  - {{ proposal.user.username }} </h2>"))
-                .addTo(map)
-                {% endfor %}
-                </script>    
             </div>
-        </div>
-        <div class="card-container" id="comment-detail-container">
-            <div class="comments-container">
-                    {% for comment in activity.comment_set.all %}
-                    <div class="comment">
-                        <div class="comment-content">{{comment.content}}</div>
-                        <p class="comment-details">Posted By {{comment.user}} at: {{comment.created}}</p>
+
+            <div class="map-comment-container">
+                <div class="card-container">
+                    <div id='map'>
+                        <script>
+                            mapboxgl.accessToken = '{{mapbox_key}}';
+                            let map = new mapboxgl.Map({
+                                container: 'map',
+                                style: 'mapbox://styles/mapbox/streets-v11',
+                                center: [{{ center }}],
+                                zoom: 11
+                            });
+                            map.addControl(
+                                new MapboxGeocoder({
+                                    accessToken: '{{mapbox_key}}',
+                                    mapboxgl: mapboxgl
+                                })
+                            );
+                            map.addControl(
+                                new mapboxgl.
+                                NavigationControl()
+                            );
+                            let marker = "";
+
+                            {% for proposal in activity.proposal_set.all %}
+                                marker = new mapboxgl.Marker()
+                                .setLngLat([{{ proposal.location }}])
+                                .setPopup(new mapboxgl.Popup()
+                                .setHTML("<h2 class='proposal-suggestion'>{{ proposal.suggestion }} <br/><br/>  - {{ proposal.user.username }} </h2>"))
+                                .addTo(map)
+                            {% endfor %}
+
+                        </script>    
                     </div>
-                    {% endfor %}
+                </div>
+
+                <div class="card-container" id="comment-detail-container">
+                    <div class="comments-container">
+
+                            {% for comment in activity.comment_set.all %}
+                                <div class="comment">
+                                    <div class="comment-content">{{comment.content}}</div>
+                                    <p class="comment-details">Posted By {{comment.user}} at: {{comment.created}}</p>
+                                </div>
+                            {% endfor %}
+
+                    </div>
+                    <div class="activity-content-container">
+                        <form action="{% url 'add_comment' activity.id %}" method="post">
+                            {% csrf_token %}
+                            {{ comment_form.as_p }}
+                            <input type="submit" class="create-btn" value="ADD COMMENT"><br><br>
+                        </form>
+                    </div>
+                </div>
             </div>
 
-                <div class="activity-content-container">
-                <form action="{% url 'add_comment' activity.id %}" method="post">
-                    {% csrf_token %}
-                    {{ comment_form.as_p }}
-                    <input type="submit" class="create-btn" value="ADD COMMENT"><br><br>
-                    </form>
-            </div>
         </div>
-    </div>
-
-
 
     </div>
-
 
 {% endblock content %}
     

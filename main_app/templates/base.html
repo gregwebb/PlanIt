@@ -25,6 +25,7 @@
 
         <nav>
             <div class='navbar-container'>
+
                 <div class='nav-wrapper-left'>
                     <ul>
                         <li><a href="{% url 'index' %}">All ACTIVITIES</a></li>
@@ -37,7 +38,6 @@
                         <form method="get" action="{% url 'search_results' %}">
                             <input type="text" name="q" class="searchTerm" placeholder="&emsp;Find an activity...">
                         </form>
-
                     </div>
                 </div>
                 <div class='nav-wrapper-right'>
@@ -50,9 +50,12 @@
                         {% endif %}
                     </ul>
                 </div>
+
             </div>
         </nav>
+
     </header>
+    
     <main class="container">
 
         {% block content %}
