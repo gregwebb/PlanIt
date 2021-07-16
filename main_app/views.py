@@ -98,7 +98,9 @@ def home(request):
 def my_list(request):
   if request.user.is_authenticated:
     activities = Activity.objects.filter(user=request.user)
-    return render(request, 'my_lists/my_list.html', { 'activities': activities })
+    attending = Activity.objects.select_related('user').filter(attendees=request.user)
+    interested = Proposal.objects.filter(user=request.user)
+    return render(request, 'my_lists/my_list.html', { 'activities': activities, 'attending': attending, 'interested': interested  })
   else:
     return render(request, 'home.html')
 
