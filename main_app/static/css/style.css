@@ -411,6 +411,7 @@ h2 {
     border-width: 3px;
 }
 
+<<<<<<< HEAD
 .search {
     width: 100%;
     margin: auto;
@@ -428,6 +429,17 @@ h2 {
     border-radius: 30px;
     color: #9DBFAF;
     }
+=======
+.attendee{
+    background-color: rgb(188, 215, 245);
+    border-radius: 30px;
+    padding: 10px;
+    margin:auto;
+    font-weight: bold;
+    width: 75%;
+    text-align: center;
+}
+>>>>>>> master
 
 @media screen and (min-width: 550px){
     nav {
@@ -480,6 +492,45 @@ h2 {
     }
 }
 
+<<<<<<< HEAD
+=======
+.search {
+    width: 40%;
+    margin: auto;
+}
+  
+.searchTerm {
+    width: 100%;
+    border: 3px solid #00B4CC;
+    padding: 5px;
+    padding-left: 10px;
+    height: 20px;
+    border-radius: 30px;
+    color: #9DBFAF;
+}
+
+.activity-name{
+    width: 85%;
+    margin: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 30px;
+    background-color: steelblue;
+    color: white;
+    font-size: x-large;
+}
+
+.activity-description-container{
+    width: 85%;
+    border-style: solid;
+    border-color: white;
+    border-width: 2px;
+    border-radius: 30px;
+    background-color: white;
+    margin: auto;
+    color: black;
+}
+>>>>>>> master
 
 @media screen and (min-width: 768px) {
 
@@ -541,7 +592,7 @@ h2 {
         font-size: 90px;
         margin: 25px 0;
     }
-    .image-container: {
+    .image-container {
         height: 600px;
     }
     #home-title {

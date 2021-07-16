@@ -11,11 +11,11 @@
                 <div class="activity-content-container">
                     <h3 class="activity-name">{{ activity.name }} with ({{ activity.user }})</h3>
                     <div class="activity-description-container">
-                        <p>CATEGORY: {{ activity.category }}</p>
-                        <p>DATE: {{ activity.date }}</p>
-                        <p>START: {{ activity.start }}</p>
-                        <p>STOP: {{ activity.stop }}</p>
-                        <p>LOCATION: {{ activity.location }}</p>
+                        <p>Activity Category: {{ activity.get_category_display|title }}</p>
+                        <p>Date of Activity: {{ activity.date }}</p>
+                        <p>Start Time: {{ activity.start }}</p>
+                        <p>End Time: {{ activity.stop }}</p>
+                        <p>Location: {{ activity.location }}</p>
                     </div>
                 </div>
             </a>
