@@ -34,7 +34,6 @@ def signup(request):
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
 
-
 @login_required
 def create_activity(request):
   form = ActivityForm(request.POST)
@@ -48,18 +47,20 @@ def create_activity(request):
     initial_proposal.location = new_activity.location
     initial_proposal.activity = new_activity
     initial_proposal.user = request.user
+    initial_proposal.begin = []
+    initial_proposal.finish = []
+    initial_proposal.begin.append(f'{new_activity.date} {new_activity.start}')
+    initial_proposal.finish.append(f'{new_activity.date} {new_activity.stop}')
     initial_proposal.suggestion = f"I would like to have activity {new_activity.name} at {new_activity.location}."
     loc = requests.get(f'https://maps.googleapis.com/maps/api/geocode/json?&address={initial_proposal.location}&key={google_key}')
     data = json.loads(loc.text)['results']
     initial_proposal.location = f"{data[0]['geometry']['location']['lng']}, {data[0]['geometry']['location']['lat']}"
     initial_proposal.save()
     return redirect('detail', activity_id=new_activity.id)
-    
 
   return render(request, 'main_app/activity_form.html', {
     'form': form
   })
-
 
 class ActivityUpdate(LoginRequiredMixin, UpdateView):
   model = Activity
@@ -67,33 +68,12 @@ class ActivityUpdate(LoginRequiredMixin, UpdateView):
   def form_valid(self, form):
     return super().form_valid(form)
 
-
 class ActivityDelete(LoginRequiredMixin, DeleteView):
   model = Activity
   success_url = '/activities/'
 
-# def home(request):
-#   if request.user.is_authenticated:
-#     activities = Activity.objects.filter(user=request.user)
-#     return render(request, 'home.html', { 'activities': activities })
-#   else:
-#     return render(request, 'home.html')
-
-
-
-
-
-
-
-
 def home(request):
     return render(request, 'home.html')
-
-
-
-
-
-
 
 
 def my_list(request):
@@ -104,7 +84,6 @@ def my_list(request):
     return render(request, 'my_lists/my_list.html', { 'activities': activities, 'attending': attending, 'interested': interested  })
   else:
     return render(request, 'home.html')
-
 
 
 def activities_index(request):
