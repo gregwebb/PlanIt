@@ -163,7 +163,7 @@
                 marker = new mapboxgl.Marker()
                 .setLngLat([{{ proposal.location }}])
                 .setPopup(new mapboxgl.Popup()
-                .setHTML("<h2>{{ proposal.suggestion }} <br/><br/>  - {{ proposal.user.username }} </h2>"))
+                .setHTML("<h2 class='proposal-suggestion'>{{ proposal.suggestion }} <br/><br/>  - {{ proposal.user.username }} </h2>"))
                 .addTo(map)
                 {% endfor %}
                 </script>    

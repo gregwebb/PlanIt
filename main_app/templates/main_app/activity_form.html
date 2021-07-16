@@ -4,10 +4,10 @@
 <div class="main-container">
   <div class="card-container">
     {% if activity %}
-      <h1>Edit <span>{{activity.name}}</span></h1>
+      <h2>Edit <span>{{activity.name}}</span></h2>
       <p>Original Date: {{ activity.date }}</p>
     {% else %}
-      <h1>Add Activity</h1>
+      <h2>Add Activity</h2>
     {% endif %}
     <form action="" method="post" id="add-activity-form">
       {% csrf_token %}
