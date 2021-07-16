@@ -3,39 +3,70 @@
 {% block content %}
 <div class="home-container">
     <div class="home-page-container">
-        {% if user.is_authenticated %}
-            <h2 class="title">Here Are Your Activities</h2>
-            <div class="new-activity-form">
-                <form action="{% url 'activities_create' %}">
-                    <input type="submit" value="CREATE NEW ACTIVITY" class="create-btn">
-                </form><br>
-            </div>
-            <div class="main-activity-box">
+    {% if user.is_authenticated %}
+        <div class="main-activity-box">
             <div class="main-activity-list">
+                <h2>Activities you created:</h2>
                 {% for activity in activities %}
-                    <div class="card-container">
-                        <a href="{% url 'detail' activity.id %}">
-                            <div class="activity-content-container">
-                                <h3 class="activity-name">{{ activity.name }}</h3>
-                                    <div class="activity-description-container">
-                                        <p>Activity Category: {{ activity.get_category_display|title }}</p>
-                                        <p>Date of Activity: {{ activity.date }}</p>
-                                        <p>Start Time: {{ activity.start }}</p>
-                                        <p>End Time: {{ activity.stop }}</p>
-                                        <p>Location: {{ activity.location }}</p>
-                                    </div>
+                <div class="card-container">
+                    <a href="{% url 'detail' activity.id %}">
+                        <div class="activity-content-container">
+                            <h3 class="activity-name">{{ activity.name }}</h3>
+                            <div class="activity-description-container">
+                                <p>Activity Category: {{ activity.get_category_display|title }}</p>
+                                <p>Date of Activity: {{ activity.date }}</p>
+                                <p>Start Time: {{ activity.start }}</p>
+                                <p>End Time: {{ activity.stop }}</p>
+                                <p>Location: {{ activity.location }}</p>
                             </div>
-                        </a>
-                    </div>
+                        </div>
+                    </a>
+                </div>
                 {% endfor %}
             </div>
+            <div class="main-activity-list">
+                <h2>Activities you're attending:</h2>
+                {% for activity in attending %}
+                <div class="card-container">
+                    <a href="{% url 'detail' activity.id %}">
+                        <div class="activity-content-container">
+                            <h3 class="activity-name">{{ activity.name }}</h3>
+                            <div class="activity-description-container">
+                                <p>Activity Category: {{ activity.get_category_display|title }}</p>
+                                <p>Date of Activity: {{ activity.date }}</p>
+                                <p>Start Time: {{ activity.start }}</p>
+                                <p>End Time: {{ activity.stop }}</p>
+                                <p>Location: {{ activity.location }}</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
             </div>
-        {% else %}
-            <button class="create-btn"><a href="{% url 'login' %}"><span class="login-btn">LOG IN</span></a></button><br><br>
-            <a href="{% url 'signup' %}">Sign Up</a>
-        {% endif %}
-    </div>
-    <div>
+            <div class="main-activity-list">
+                <h2>Activities you're interested in:</h2>
+                {% for activity in interested %}
+                <div class="card-container">
+                    <a href="{% url 'detail' activity.activity.id %}">
+                        <div class="activity-content-container">
+                            <h3 class="activity-name">{{ activity.activity.name }}</h3>
+                            <div class="activity-description-container">
+                                <p>Activity Category: {{ activity.activity.get_category_display|title }}</p>
+                                <p>Date of Activity: {{ activity.activity.date }}</p>
+                                <p>Start Time: {{ activity.activity.start }}</p>
+                                <p>End Time: {{ activity.activity.stop }}</p>
+                                <p>Location: {{ activity.activity.location }}</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+    <button class="create-btn"><a href="{% url 'login' %}"><span class="login-btn">LOG IN</span></a></button><br><br>
+    <a href="{% url 'signup' %}">Sign Up</a>
+    {% endif %}
     </div>
 </div>
 {% endblock content %}
