@@ -1,23 +1,26 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="main-container">
-  <div class="card-container">
-    {% if activity %}
-      <h2>Edit <span>{{activity.name}}</span></h2>
-      <p>Original Date: {{ activity.date }}</p>
-    {% else %}
-      <h2>Add Activity</h2>
-    {% endif %}
-    <form action="" method="post" id="add-activity-form">
-      {% csrf_token %}
-      <table>
-        {{ form.as_table }}
-      </table>
-      <input type="submit" value="SUBMIT!" class="create-btn" id="add-activity-btn">
-    </form>
 
+  <div class="main-container">
+    <div class="card-container">
+
+      {% if activity %}
+        <h2>Edit <span>{{activity.name}}</span></h2>
+        <p>Original Date: {{ activity.date }}</p>
+      {% else %}
+        <h2>Add Activity</h2>
+      {% endif %}
+
+      <form action="" method="post" id="add-activity-form">
+        {% csrf_token %}
+        <table>
+          {{ form.as_table }}
+        </table>
+        <input type="submit" value="SUBMIT!" class="create-btn" id="add-activity-btn">
+      </form>
+
+    </div>
   </div>
 
-</div>
 {% endblock %}

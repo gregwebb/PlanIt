@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
     {% load static %}
     <div class="home-container">
         <div class="home-page-container" id="home-page-container-id">
@@ -27,37 +28,35 @@
                             <br>
                             next event with PlanIt
                         </p>
-
                     </div>
-    
                 </div>
 
+            </div>
 
-            </div>
             {% if user.is_authenticated == False %}
-            <div class="login-signup">
-                <button class="create-btn"><a href="{% url 'login' %}"><span class="login-btn">LOG IN</span></a></button><br><br>
-                <a href="{% url 'signup' %}" class="font-port">Sign Up</a>
-            </div>
+                <div class="login-signup">
+                    <button class="create-btn"><a href="{% url 'login' %}"><span class="login-btn">LOG IN</span></a></button><br><br>
+                    <a href="{% url 'signup' %}" class="font-port">Sign Up</a>
+                </div>
             {% else %}
-            <div class="new-activity-form">
-                <form action="{% url 'activities_create' %}">
-                    <input type="submit" value="CREATE NEW ACTIVITY" class="create-btn">
-                </form><br>
-            </div>
-            <div class="my-list-link">
-                <form action="{% url 'my_list' %}">
-                    <input type="submit" value="GO TO MY LISTS" class="create-btn">
-                </form><br>
-            </div>
+                <div class="new-activity-form">
+                    <form action="{% url 'activities_create' %}">
+                        <input type="submit" value="CREATE NEW ACTIVITY" class="create-btn">
+                    </form><br>
+                </div>
+                <div class="my-list-link">
+                    <form action="{% url 'my_list' %}">
+                        <input type="submit" value="GO TO MY LISTS" class="create-btn">
+                    </form><br>
+                </div>
             {% endif %}
 
         </div>
     </div>
+
     <script>
         $(document).ready(function() {
             $(".image-container > div:gt(0)").hide();
-
             setInterval(function() { 
             $('.image-container > div:first')
             .fadeOut(1000)

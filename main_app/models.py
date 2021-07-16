@@ -1,8 +1,7 @@
 from django.db import models
 from django.urls import reverse
-from django.contrib.postgres.fields import ArrayField, DateTimeRangeField
+from django.contrib.postgres.fields import ArrayField
 from django.contrib.auth.models import User
-from django.conf import settings
 from django import forms
 
 from functools import partial
@@ -42,6 +41,7 @@ class Activity(models.Model):
   class Meta:
         verbose_name_plural = "activities"
 
+
 class Proposal(models.Model):
   activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
   user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -49,6 +49,7 @@ class Proposal(models.Model):
   location = location = models.CharField(max_length=255)
   begin = ArrayField(models.DateTimeField(), blank=True, null=True)
   finish = ArrayField(models.DateTimeField(), blank=True, null=True)
+
 
 class Comment(models.Model):
   activity = models.ForeignKey(Activity, on_delete=models.CASCADE)

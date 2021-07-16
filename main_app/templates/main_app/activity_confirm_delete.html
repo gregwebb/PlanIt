@@ -2,19 +2,20 @@
 
 {% block content %}
 
-<div class="main-container">
-  <div class="card-container">
-    <h2>Delete Activity</h2>
-  
-    <h4>Are you sure you want to delete <span>{{ object.name }}</span>?</h4>
-  
-    <form action="" method="POST">
-      {% csrf_token %}
-      <input type="submit" value="Yes - Delete!" class="delete-btn">
-      <a href="{% url 'detail' activity.id %}">Cancel</a>
-    </form>
+  <div class="main-container">
+    <div class="card-container">
+      <h2>Delete Activity</h2>
+      <br>
+      <h4>Are you sure you want to delete <span>{{ object.name }}</span>?</h4>
+      <br>
+      <form action="" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Yes - Delete!" class="delete-btn">
+        <span>&emsp;</span>
+        <a href="{% url 'detail' activity.id %}">Cancel</a>
+      </form>
 
+    </div>
   </div>
 
-</div>
 {% endblock %}

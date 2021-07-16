@@ -1,10 +1,6 @@
-# from typing_extensions import Required
 from django import forms
 from django.forms import ModelForm
-from django.forms import widgets
 from .models import Proposal, Activity, Comment
-
-from django.forms.widgets import TextInput
 
 
 class ActivityForm(ModelForm):
@@ -25,6 +21,7 @@ class ActivityForm(ModelForm):
             'stop': forms.TimeInput(attrs={'type': 'time'}),
         }
 
+
 class ProposalForm(ModelForm):
   class Meta:
     model = Proposal
@@ -42,6 +39,7 @@ class ProposalForm(ModelForm):
       'location': forms.Textarea(attrs={"rows":2,'placeholder':'add location preference here - helpful to include city ', 'style': 'border-radius: 30px', 'class': 'proposal-text-box'})
     }
 
+
 class ProposalUpdateForm(ModelForm):
   class Meta:
     model = Proposal
@@ -55,6 +53,7 @@ class ProposalUpdateForm(ModelForm):
       'location': forms.Textarea(attrs={"rows":2,'placeholder':'update location preference here - helpful to include city ', 'style': 'border-radius: 30px', 'class': 'proposal-text-box'})
     }
 
+
 class ProposalUpdateTimeForm(ModelForm):
   class Meta:
     model = Proposal
@@ -67,6 +66,7 @@ class ProposalUpdateTimeForm(ModelForm):
       'begin': forms.DateTimeInput(attrs={'type': 'datetime-local','class': 'form-control'},format='%Y-%m-%dT%H:%M'),
       'finish': forms.DateTimeInput(attrs={'type': 'datetime-local','class': 'form-control'},format='%Y-%m-%dT%H:%M')
     }
+
 
 class CommentForm(ModelForm):
   class Meta:
