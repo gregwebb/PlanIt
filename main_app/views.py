@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
-from django.views.generic.edit import CreateView, UpdateView, DeleteView, ModelFormMixin
-from .models import Activity, Proposal, Comment
-
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from .models import Activity, Proposal
 from .forms import ActivityForm, ProposalForm, CommentForm, ProposalUpdateForm, ProposalUpdateTimeForm
 
 from django.contrib.auth import login
@@ -32,6 +31,10 @@ def signup(request):
   return render(request, 'registration/signup.html', context)
 
 
+def home(request):
+    return render(request, 'home.html')
+
+
 @login_required
 def create_activity(request):
   form = ActivityForm(request.POST)
@@ -51,46 +54,15 @@ def create_activity(request):
     initial_proposal.save()
     return redirect('detail', activity_id=new_activity.id)
     
-
   return render(request, 'main_app/activity_form.html', {
     'form': form
   })
 
 
-class ActivityUpdate(LoginRequiredMixin, UpdateView):
-  model = Activity
-  form_class = ActivityForm
-  def form_valid(self, form):
-    return super().form_valid(form)
-
-
-class ActivityDelete(LoginRequiredMixin, DeleteView):
-  model = Activity
-  success_url = '/activities/'
-
-
-def home(request):
-    return render(request, 'home.html')
-
-
-
-
-
-
-
-
-def my_list(request):
-  if request.user.is_authenticated:
-    activities = Activity.objects.filter(user=request.user)
-    return render(request, 'my_lists/my_list.html', { 'activities': activities })
-  else:
-    return render(request, 'home.html')
-
-
-
 def activities_index(request):
   activities = Activity.objects.all()
   return render(request, 'activities/index.html', { 'activities': activities })
+
 
 def activities_detail(request, activity_id):
   activity = Activity.objects.get(id=activity_id)
@@ -134,20 +106,36 @@ def activities_detail(request, activity_id):
     'attending': attending
   })
 
+
+class ActivityUpdate(LoginRequiredMixin, UpdateView):
+  model = Activity
+  form_class = ActivityForm
+  def form_valid(self, form):
+    return super().form_valid(form)
+
+
+class ActivityDelete(LoginRequiredMixin, DeleteView):
+  model = Activity
+  success_url = '/activities/'
+def my_list(request):
+  if request.user.is_authenticated:
+    activities = Activity.objects.filter(user=request.user)
+    return render(request, 'my_lists/my_list.html', { 'activities': activities })
+  else:
+    return render(request, 'home.html')
+
+
 class ProposalCreate(LoginRequiredMixin, CreateView):
   model = Proposal
   fields = ['activity', 'user', 'suggestion', 'location']
-
-def delete_proposal(request, activity_id):
-    delete_proposal = Proposal.objects.filter(activity_id=activity_id).filter(user=request.user).first()
-    delete_proposal.delete()
-    return redirect('detail', activity_id=activity_id)
   
+
 def proposals_detail(request, proposal_id):
   proposal = Proposal.objects.get(id=proposal_id)
   return render(request, 'proposals/detail.html', {
     'proposal': proposal
   })
+
 
 @login_required
 def add_proposal(request, activity_id):
@@ -161,6 +149,7 @@ def add_proposal(request, activity_id):
     new_proposal.location = f"{data[0]['geometry']['location']['lng']}, {data[0]['geometry']['location']['lat']}"
     new_proposal.save()
   return redirect('detail', activity_id=activity_id)
+
 
 @login_required
 def update_proposal(request, activity_id):
@@ -178,6 +167,7 @@ def update_proposal(request, activity_id):
     update_proposal.finish = existing_proposal.finish
     update_proposal.save()
   return redirect('detail', activity_id=activity_id)
+
 
 @login_required
 def update_proposal_time(request, activity_id):
@@ -197,6 +187,13 @@ def update_proposal_time(request, activity_id):
     update_proposal.save()
   return redirect('detail', activity_id=activity_id)
 
+
+def delete_proposal(request, activity_id):
+    delete_proposal = Proposal.objects.filter(activity_id=activity_id).filter(user=request.user).first()
+    delete_proposal.delete()
+    return redirect('detail', activity_id=activity_id)
+
+
 @login_required
 def add_comment(request, activity_id):
   form = CommentForm(request.POST)
@@ -207,6 +204,7 @@ def add_comment(request, activity_id):
     new_comment.save()
   return redirect('detail', activity_id=activity_id)
 
+
 @login_required
 def add_attendee(request, activity_id):
   activity = Activity.objects.get(id=activity_id)
@@ -215,6 +213,7 @@ def add_attendee(request, activity_id):
   else:
     pass
   return redirect('detail', activity_id=activity_id)
+
 
 @login_required
 def remove_attendee(request, activity_id):
