@@ -81,8 +81,10 @@ def activities_detail(request, activity_id):
   new_coors = []
   sum_lng = 0
   sum_lat = 0
+  proposal_time = 0
   for proposal in proposals:
     coors.append(proposal.location)
+    proposal_time = zip(proposal.begin, proposal.finish)
   for item in coors:
     result = [x.strip() for x in item.split(',')]
     new_coors.append(result)
@@ -108,7 +110,8 @@ def activities_detail(request, activity_id):
     'comment_form': comment_form, 
     'user_proposal': user_proposal,
     'proposal_update_form': proposal_update_form, 
-    'proposal_update_time_form': proposal_update_time_form, 
+    'proposal_update_time_form': proposal_update_time_form,
+    'proposal_time': proposal_time, 
     'attending': attending,
     'mapbox_key': os.environ.get('MAPBOX_KEY')    
   })
