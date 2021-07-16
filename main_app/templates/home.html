@@ -37,7 +37,7 @@
             {% if user.is_authenticated == False %}
             <div class="login-signup">
                 <button class="create-btn"><a href="{% url 'login' %}"><span class="login-btn">LOG IN</span></a></button><br><br>
-                <a href="{% url 'signup' %}">Sign Up</a>
+                <a href="{% url 'signup' %}" class="font-port">Sign Up</a>
             </div>
             {% else %}
             <div class="new-activity-form">
