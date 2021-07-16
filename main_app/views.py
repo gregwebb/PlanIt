@@ -8,6 +8,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
 
 import requests, json
 import os
@@ -218,11 +219,13 @@ def add_comment(request, activity_id):
 
 
 def my_list(request):
-  if request.user.is_authenticated:
-    activities = Activity.objects.filter(user=request.user)
-    return render(request, 'my_lists/my_list.html', { 'activities': activities })
-  else:
-    return render(request, 'home.html')
+   if request.user.is_authenticated:
+     activities = Activity.objects.filter(user=request.user)
+     attending = Activity.objects.select_related('user').filter(attendees=request.user).filter(~Q(user=request.user))
+     interested = Proposal.objects.filter(user=request.user)
+     return render(request, 'my_lists/my_list.html', { 'activities': activities, 'attending': attending, 'interested': interested  })
+   else:
+     return render(request, 'home.html')
 
 
 @login_required
