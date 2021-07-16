@@ -105,19 +105,22 @@ main {
     transform:translateX(-50%);
     margin-right: auto;
 }
+.title-paragraph {
+    background-color: rgba(0,0,0,.4);
+    box-shadow: 0 0 50px rgba(0,0,0,1);
+    border-radius: 30px;
+}
 #home-title {
     margin-top: -230px;
     font-size: 20px;
-    text-shadow: 0 0 30px rgba(0,0,0,1);
-}
-#home-welcome-paragraph {
-    text-shadow: 0 0 30px rgba(0,0,0,1);
 }
 .main-image {
     width: 100%;
     height: 100%;
     overflow: hidden;
     border-radius: 30px;
+    object-fit: cover;
+    
 }
 .image-container {
     border-radius: 30px;
@@ -166,6 +169,7 @@ footer {
 
 .card-container {
     margin: 15px;
+    padding: 15px;
     border-radius: 30px;
     background-color: rgba(113, 175, 198, .80);
 }
@@ -408,6 +412,23 @@ h2 {
     border-width: 3px;
 }
 
+.search {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+.search-container {
+    width: 90%;
+}
+.searchTerm {
+    width: 100%;
+    border: 3px solid #00B4CC;
+    padding: 5px 0px;
+    height: 20px;
+    border-radius: 30px;
+    color: #9DBFAF;
+    }
 .attendee{
     background-color: rgb(188, 215, 245);
     border-radius: 30px;
@@ -419,6 +440,9 @@ h2 {
 }
 
 @media screen and (min-width: 550px){
+    nav {
+        padding: 20px 0;
+    }
     .navbar-container{
         flex-direction: row;
         position: relative;
@@ -432,6 +456,7 @@ h2 {
     }
 
     .nav-wrapper-right ul {
+        margin-top: 10px;
         display: flex;
         flex-direction: row;
     }
@@ -445,21 +470,24 @@ h2 {
     .image-container {
         height: 300px;
     }
-}
-
-.search {
-    width: 40%;
-    margin: auto;
-}
-  
-.searchTerm {
-    width: 100%;
-    border: 3px solid #00B4CC;
-    padding: 5px;
-    padding-left: 10px;
-    height: 20px;
-    border-radius: 30px;
-    color: #9DBFAF;
+    .navbar-container {
+        display: grid;
+        grid-template-columns: 3fr 2fr;
+        grid-template-areas:
+            "wrapper-left search"
+            "wrapper-left wrapper-right";
+    }
+    .nav-wrapper-left {
+        grid-area: wrapper-left;
+    }
+    .search {
+        grid-area: search;
+        justify-content: flex-end;
+        transform: translateX(-5%)
+    }
+    .nav-wrapper-right {
+        grid-area: wrapper-right;
+    }
 }
 
 .activity-name{
@@ -468,7 +496,7 @@ h2 {
     padding-top: 10px;
     padding-bottom: 10px;
     border-radius: 30px;
-    background-color: steelblue;
+    background-color: rgba(35, 98, 119, 0.8);
     color: white;
     font-size: x-large;
 }
@@ -479,12 +507,13 @@ h2 {
     border-color: white;
     border-width: 2px;
     border-radius: 30px;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.95);
     margin: auto;
     color: black;
 }
 
 @media screen and (min-width: 768px) {
+
     #logo {
         font-size: 70px;
         margin: 25px 0;
